@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0 p-4">
+            <h2 class="text-center text-primary mb-2">Módulo de Inscripción de Estudiantes</h2>
+            <p class="text-center text-muted mb-4">Complete los datos requeridos para formalizar el registro escolar y crear su cuenta en el CAIDVA.</p>
+            
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Correo Electrónico -->
+                <div class="mb-3">
+                    <label for="correo" class="form-label fw-bold">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
+                    <div class="form-text text-secondary">Este correo lo usará para iniciar sesión en la plataforma.</div>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Cree una contraseña segura" required>
+                    <div class="form-text text-secondary">Defina la contraseña con la que ingresará a su cuenta.</div>
+                </div>
+
+                <!-- Cédula del Alumno -->
+                <div class="mb-3">
+                    <label for="ced_alum" class="form-label fw-bold">Cédula del Alumno</label>
+                    <input type="text" class="form-control" id="ced_alum" name="ced_alum" placeholder="Ej: V-25123456" required>
+                    <div class="form-text text-secondary">Ingrese el número de cédula de identidad o escolar del estudiante.</div>
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="mb-3">
+                    <label for="fec_nac" class="form-label fw-bold">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="fec_nac" name="fec_nac" required>
+                    <div class="form-text text-secondary">Seleccione el día, mes y año de nacimiento del estudiante.</div>
+                </div>
+
+                <!-- Selector de Línea de Atención -->
+                <div class="mb-3">
+                    <label for="linea_atencion" class="form-label fw-bold">Línea de Atención</label>
+                    <select class="form-select" id="linea_atencion" name="linea_atencion" onchange="toggleInstituto()" required>
+                        <option value="" selected disabled>Seleccione la modalidad de atención...</option>
+                        <option value="Atención Directa">Atención Directa (Sede CAIDVA)</option>
+                        <option value="Integración Escolar">Integración Escolar</option>
+                    </select>
+                    <div class="form-text text-secondary">Seleccione si acude directamente a la sede o si se encuentra integrado en una escuela regular.</div>
+                </div>
+
+                <!-- SECCIÓN DINÁMICA: Datos del Instituto (Solo si elige Integración Escolar) -->
+                <div id="seccion_instituto" class="card p-3 mb-3 bg-light border-primary" style="display: none;">
+                    <h5 class="text-primary mb-3">Datos del Instituto de Integración</h5>
+                    
+                    <div class="mb-3">
+                        <label for="nom_ins" class="form-label fw-bold">Nombre del Instituto</label>
+                        <input type="text" class="form-control" id="nom_ins" name="nom_ins" placeholder="Ej: U.E. Nacional Boyacá">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cod_ins" class="form-label fw-bold">Código del Instituto</label>
+                        <input type="text" class="form-control" id="cod_ins" name="cod_ins" placeholder="Ej: COD-12345">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rif_ins" class="form-label fw-bold">RIF del Instituto</label>
+                        <input type="text" class="form-control" id="rif_ins" name="rif_ins" placeholder="Ej: J-12345678-9">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="grado_escolar" class="form-label fw-bold">Grado, Año o Semestre</label>
+                        <input type="text" class="form-control" id="grado_escolar" name="grado_escolar" placeholder="Ej: 3er Grado / 2do Año / 1er Semestre">
+                    </div>
+                </div>
+
+                <!-- Informe Médico -->
+                <div class="mb-3">
+                    <label for="informe_medico" class="form-label fw-bold">Informe Médico / Discapacidad Visual (PDF o Imagen)</label>
+                    <input type="file" class="form-control" id="informe_medico" name="informe_medico" accept=".pdf,image/*" required>
+                    <div class="form-text text-secondary">Adjunte el documento digitalizado que certifique la condición visual del estudiante.</div>
+                </div>
+
+                <!-- Teléfono de Contacto -->
+                <div class="mb-3">
+                    <label for="tel_alum" class="form-label fw-bold">Teléfono de Contacto</label>
+                    <input type="tel" class="form-control" id="tel_alum" name="tel_alum" placeholder="Ej: 0414-1234567" required>
+                    <div class="form-text text-secondary">Ingrese un número telefónico activo de contacto.</div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 btn-lg mt-3">Registrar Estudiante y Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleInstituto() {
+    var select = document.getElementById("linea_atencion");
+    var seccion = document.getElementById("seccion_instituto");
+    
+    if (select.value === "Integración Escolar") {
+        seccion.style.display = "block";
+        document.getElementById("nom_ins").required = true;
+        document.getElementById("cod_ins").required = true;
+        document.getElementById("rif_ins").required = true;
+        document.getElementById("grado_escolar").required = true;
+    } else {
+        seccion.style.display = "none";
+        document.getElementById("nom_ins").required = false;
+        document.getElementById("cod_ins").required = false;
+        document.getElementById("rif_ins").required = false;
+        document.getElementById("grado_escolar").required = false;
+    }
+}
+</script>
+{% endblock %}

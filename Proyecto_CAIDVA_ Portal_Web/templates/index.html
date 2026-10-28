@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row align-items-center py-4">
+    <div class="col-lg-7">
+        <h1 class="display-5 fw-bold text-primary mb-3">Portal Educativo e Inclusivo del CAIDVA</h1>
+        <p class="lead text-secondary">
+            Brindamos atención educativa integral a niños, jóvenes y adultos ciegos o con baja visión en el Estado Anzoátegui[cite: 7, 8], promoviendo la autonomía digital, el aprendizaje del sistema Braille y orientación espacial.
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+            <a href="{{ url_for('registro') }}" class="btn btn-primary btn-lg px-4 me-md-2" aria-label="Ir al módulo de inscripción de estudiantes">Módulo de Inscripción</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg px-4" aria-label="Acceso al sistema administrativo">Acceso Administrativo</a>
+        </div>
+    </div>
+    <div class="col-lg-5 mt-4 mt-lg-0">
+        <div class="card shadow border-0 p-4 bg-white">
+            <h3 class="h4 text-dark mb-3">Información y Horarios</h3>
+            <ul class="list-unstyled mb-0">
+                <li class="mb-2"><strong>Ubicación:</strong> Sector Puentecito de Boyacá II, Troncal 9, Barcelona[cite: 8].</li>
+                <li class="mb-2"><strong>Líneas de Atención:</strong> Directa e Integrada[cite: 10].</li>
+                <li class="mb-2"><strong>Personal Especializado:</strong> Docentes capacitados en área visual y Braille[cite: 10].</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

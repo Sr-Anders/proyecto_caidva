@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 text-primary">Panel de Control Administrativo - CAIDVA</h1>
+    <a href="{{ url_for('generar_pdf') }}" class="btn btn-danger" aria-label="Descargar reporte oficial en formato PDF">Descargar Reporte PDF</a>
+</div>
+
+<div class="card shadow border-0 p-4">
+    <h3 class="h5 text-dark mb-3">Lista de Estudiantes Registrados</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Grado / Línea</th>
+                    <th>Información Médica</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alum in alumnos %}
+                <tr>
+                    <td>{{ alum.CedAlum }}</td>
+                    <td>{{ alum.FecNacAlum }}</td>
+                    <td>{{ alum.GradoConAlum }}</td>
+                    <td>{{ alum.InfMedAlum }}</td>
+                    <td>{{ alum.NumTelAlum }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No hay estudiantes registrados todavía.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
