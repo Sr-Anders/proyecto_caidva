@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file
 import mysql.connector
 import os
+import io
 from werkzeug.utils import secure_filename
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 app = Flask(__name__)
-app.secret_key = 'clave_secreta_segura_caidva'
+app.secret_key = 'your_secret_key' 
 
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -14,7 +16,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '*/NiGG4/M4n/102/*',
+    'password': '',
     'database': 'caidva_db'
 }
 
