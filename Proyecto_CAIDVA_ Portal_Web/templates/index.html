@@ -18,8 +18,13 @@
         margin: 0;
         padding: 0;
       }
+      html {
+      scroll-behavior: smooth;
+      }
       body {
         overscroll-behavior: none;
+        
+
       }
       main > :first-child {
         margin-top: 0 !important;
@@ -128,6 +133,7 @@
       }
     };
   </script>
+
 </head>
 
 <body class="bg-background font-body-md text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed" style="min-height: 100vh; height: auto; overflow-y: auto;">
@@ -177,11 +183,11 @@
       <!-- Navigation Links -->
       <nav class="hidden xl:flex items-center gap-6" data-active-classes="text-secondary font-bold">
         <a aria-current="page" class="transition-colors py-2 text-secondary font-bold" data-path="inicio" href="#">Inicio</a>
-        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="nosotros" href="#">Nosotros</a>
-        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="areas-de-formacion" href="#">Áreas de Formación</a>
-        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="actividades-cotidianas" href="#">Actividades Cotidianas</a>
-        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="tiflotecnologia" href="#">Tiflotecnología</a>
-        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="deporte-adaptado" href="#">Deporte Adaptado</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="nosotros" href="#nosotros">Nosotros</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="actividades-cotidianas" href="#actividades-cotidianas">Actividades Cotidianas</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="tiflotecnologia" href="#formacion-tiflotecnologia">Tiflotecnología</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="deporte-adaptado" href="#deporte-adaptado">Deporte Adaptado</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="areas-de-formacion" href="#valores-metodologia">Nuestro Enfoque</a>
       </nav>
 
       <!-- Action Buttons -->
@@ -337,8 +343,313 @@
     </div>
   </div>
 </section>
+<section id="nosotros" class="relative w-full bg-surface-container-low overflow-hidden py-12 md:py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+          <h1 class="font-headline-lg text-headline-lg text-on-surface max-w-4xl tracking-tight sm:text-[40px] sm:leading-[48px] mb-4">
+            Nosotros
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed">
+            Comprometidos con la vocación de servicio, la autonomía humana y la inclusión educativa integral de personas con discapacidad visual en el Estado Anzoátegui.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section: ¿Qué es el CAIDV Anzoátegui? -->
+      <section class="w-full py-12 md:py-16 px-6 lg:px-12 bg-surface">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-6 text-center">
+            <div class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md uppercase tracking-wider justify-center">
+              <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+              <span>Identidad y Función Pública</span>
+            </div>
+            
+            <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight text-center">
+              ¿Qué es el CAIDV Anzoátegui?
+            </h2>
+            
+            <div class="p-6 rounded-xl bg-surface-container-lowest shadow-sm space-y-4 text-on-surface">
+              <p class="font-body-lg text-body-lg leading-relaxed text-on-surface">
+                El Centro de Atención Integral de Deficiencias Visuales Anzoátegui (CAIDVA), es una Unidad Operativa adscrita al Ministerio del Poder Popular para la Educación en la Modalidad de Educación Especial, que brinda Atención Integral a niños, jóvenes y adultos ciegos y deficientes visuales, con o sin problemas asociados. Atiende frecuentemente personas interesadas en información sobre el área y solicitando detección de necesidades de atención.
+              </p>
+            </div>
+
+            <!-- Pillar highlights -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-2">
+                <span class="material-symbols-outlined text-secondary text-[24px]">child_care</span>
+                <span class="font-label-md text-label-md text-on-surface uppercase font-semibold">Todas las Edades</span>
+                <span class="font-body-md text-body-md text-on-surface-variant">Desde la infancia temprana hasta adultos y personas mayores.</span>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-2">
+                <span class="material-symbols-outlined text-secondary text-[24px]">health_and_safety</span>
+                <span class="font-label-md text-label-md text-on-surface uppercase font-semibold">Detección y Valoración</span>
+                <span class="font-body-md text-body-md text-on-surface-variant">Evaluación pedagógica y canalización de necesidades especiales.</span>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-2">
+                <span class="material-symbols-outlined text-secondary text-[24px]">account_balance</span>
+                <span class="font-label-md text-label-md text-on-surface uppercase font-semibold">Soporte MPPE</span>
+                <span class="font-body-md text-body-md text-on-surface-variant">Unidad operativa oficial con respaldo normativo nacional.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Photo Feature -->
+          <div class="lg:col-span-5 flex flex-col">
+            <div class="group relative rounded-xl overflow-hidden shadow-md bg-surface-container-lowest">
+              <img alt="Equipo directivo y docente del CAIDVA posando junto al estandarte institucional con el lema No Mires por Mí, Enséñame a Ver" class="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_jiRkP3BbIPFuotGN2mwmsFSYL-GfBZ5QpNZN0-Mx9H7QVHap7JMS25jQwQPApZApJufo2DXeGH0VveUAwtN7dfQDB_YauRWDxXlcMX6rLLXj8fxDjeh05UJuSY8Vw4kwAc4_82-DKT_k3_V3nAeJVpTph6rggNvR_KEDleNpWwo39LN9b3P8EaDBb_rri0HfriUlAOdFy7uuWUN3UlL4Uuj4ZfYNJF9bM05MJ4hNEFBURTs5eBwskgJvBiScEnvbCRZ1FL8vDYbc2Vc">
+              <div class="p-5 bg-surface-container-lowest flex flex-col gap-1.5 text-center">
+                <div class="flex items-center justify-center">
+                  <span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">
+                    <span class="material-symbols-outlined text-[16px]">groups</span>
+                    Equipo Multidisciplinario
+                  </span>
+                  <span class="text-on-surface-variant font-label-sm text-label-sm ml-4">Sede Oficial</span>
+                </div>
+                <p class="font-headline-sm text-headline-sm text-on-surface">Comunidad y Vocación Educativa</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Especialistas y docentes reunidos junto al pendón insignia del CAIDV Anzoátegui.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section: Galería del Equipo y Actividades en Sede -->
+      <section class="w-full py-12 md:py-16 px-6 lg:px-12 bg-surface-container-low">
+        <div class="max-w-7xl mx-auto flex flex-col gap-8">
+          <div class="flex flex-col items-center justify-center gap-2 text-center w-full mx-auto">
+            <div class="flex flex-col items-center text-center mx-auto">
+              <span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Galería Institucional</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">El Equipo en Acción Diaria</h2>
+            </div>
+          </div>
+
+          <!-- Photo Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Card 1 -->
+            <div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+              <div class="h-64 overflow-hidden bg-surface-container-high">
+                <img alt="Interacción formativa y registro en las instalaciones del centro CAIDVA" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKfu-3eD6fOqZSIjQ88R34Ucdlezkqh49Nb3EwiA44JQjTxIj4gka8aAcwxu25Bjf782IIeBJPC7M-z8zg23LHFee7Q0R5d1-9Z_yYyQ0LFKgJc4mB2PX_ePb-sWJ_cabDGo05A8p8K2lw7lCn3tohOgWxV7XZKSW7h45Q9Phjx3ilp5mTszb59KAap6p7H1u8kTfg54XzqOzya0GDaNbvyc7QvQBGFYgm_4zHz9ANCJP-e0a00GuCAw">
+              </div>
+              <div class="p-5 flex flex-col gap-2 text-center">
+                <div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-semibold uppercase justify-center">
+                  <span class="material-symbols-outlined text-[16px]">school</span>
+                  <span>Atención Pedagógica</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Interacción Formativa</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Jornadas de acompañamiento individual y grupal, donde se promueven las habilidades táctiles, cognitivas y motrices.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+              <div class="h-64 overflow-hidden bg-surface-container-high">
+                <img alt="Personal docente y administrativo del CAIDVA en el recinto institucional" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUvfzZiBRI61926mVMAmEvZ1tstNdtDf38Rt8GJD79jshSr6st4yLy3-2vYdarA2O6ctvIqBMeyFqS5y1SRGWPq8t4ed2XAD1f4zvSAyYZA5iFKleGit1yjeIOffRrAPng9ensfF4NWIgrWaNX-4D9n_16bXN5ldSSzWVp6ss5VDLVVmv2k2JvjsXqaTSS7C2PMmBDYO_EeqvQRIzTfGFJjp53vzMkUKANcaHiZFVtZ4vkDY21sBVH5Q">
+              </div>
+              <div class="p-5 flex flex-col gap-2 text-center">
+                <div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-semibold uppercase justify-center">
+                  <span class="material-symbols-outlined text-[16px]">badge</span>
+                  <span>Cuerpo Profesional</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Personal Docente y Técnico</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Profesionales especializados en educación especial dedicados al seguimiento formativo e integración comunitaria.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flex flex-col rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+              <div class="h-64 overflow-hidden bg-surface-container-high">
+                <img alt="Docentes y especialistas del CAIDVA en dinámicas pedagógicas y adaptativas" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9mTYR7SHWjUlMXx47rEvXJhgMcptItSoBtndxgtggY8BZJKBjAkSpAZPB-_Kr3ZmTpaYCIyOsfiM6_Wbv_H2X9fXJj-mqM6i--4GGbJldVCH09nsaEBaNGhAD0Bw_L0DzqL7WmjiITmiJADfoQ145poEeWTIA4zMCWpBDliKnyk80TX0817XNM2QsqgdtGEJ62Z8nZ-kKBDR369zpGBB8Tr5IpPqNsB3XohP6GGFAMcyrbN59bbr4Ig">
+              </div>
+              <div class="p-5 flex flex-col gap-2 text-center">
+                <div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-semibold uppercase justify-center">
+                  <span class="material-symbols-outlined text-[16px]">psychology</span>
+                  <span>Metodologías Adaptativas</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">Dinámicas de Adaptación</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Planificación activa para el desarrollo de la autonomía espacial, la tiflotecnología y el refuerzo multisensorial.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: OBJETIVOS -->
+      <section class="w-full py-12 md:py-16 px-6 lg:px-12 bg-surface">
+        <div class="max-w-7xl mx-auto flex flex-col gap-8">
+          <div class="rounded-2xl bg-primary-container text-on-primary-container p-8 md:p-12 shadow-xl relative overflow-hidden">
+            
+            <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-4xl space-y-6 text-center mx-auto">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold justify-center">
+                <span class="material-symbols-outlined text-[16px]">target</span>
+                <span>Propósito Esencial</span>
+              </div>
+              
+              <h2 class="font-headline-lg text-headline-lg text-on-secondary tracking-tight">
+                Objetivos Institucionales
+              </h2>
+              
+              <blockquote class="p-6 rounded-xl bg-surface-container-highest/10 backdrop-blur-md text-surface">
+                <p class="font-body-lg text-body-lg leading-relaxed text-inverse-on-surface">
+                  Garantizar la Atención Educativa Integral a través de un proceso sistemático y continuo que aborde al individuo desde su nacimiento hasta la adultez con el fin de lograr que las personas ciegas y deficientes visuales puedan participar e integrarse en forma plena, armónica y satisfactoria al nivel familiar, escolar laboral y en el medio donde de desenvuelven.
+                </p>
+              </blockquote>
+
+              <!-- 4 Integration Dimensions -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                <div class="p-4 rounded-xl bg-surface-container-lowest/10 backdrop-blur-sm flex flex-col items-center justify-center text-center gap-2 text-surface">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[26px]">family_restroom</span>
+                  <div class="flex flex-col items-center text-center">
+                    <p class="font-headline-sm text-headline-sm text-on-secondary">Familiar</p>
+                    <p class="font-body-md text-body-md text-on-primary-container">Orientación y fortalecimiento del núcleo parental y afectivo.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl bg-surface-container-lowest/10 backdrop-blur-sm flex flex-col items-center justify-center text-center gap-2 text-surface">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[26px]">school</span>
+                  <div class="flex flex-col items-center text-center">
+                    <p class="font-headline-sm text-headline-sm text-on-secondary">Escolar</p>
+                    <p class="font-body-md text-body-md text-on-primary-container">Inclusión en aulas regulares con adaptaciones curriculares.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl bg-surface-container-lowest/10 backdrop-blur-sm flex flex-col items-center justify-center text-center gap-2 text-surface">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[26px]">work</span>
+                  <div class="flex flex-col items-center text-center">
+                    <p class="font-headline-sm text-headline-sm text-on-secondary">Laboral</p>
+                    <p class="font-body-md text-body-md text-on-primary-container">Capacitación productiva y autonomía vocacional activa.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl bg-surface-container-lowest/10 backdrop-blur-sm flex flex-col items-center justify-center text-center gap-2 text-surface">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[26px]">public</span>
+                  <div class="flex flex-col items-center text-center">
+                    <p class="font-headline-sm text-headline-sm text-on-secondary">Social</p>
+                    <p class="font-body-md text-body-md text-on-primary-container">Participación plena y protagónica en la sociedad civil.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Misión y Visión -->
+      <section class="w-full py-12 md:py-16 px-6 lg:px-12 bg-surface-container-low">
+        <div class="max-w-7xl mx-auto flex flex-col gap-10">
+          <div class="text-center max-w-2xl mx-auto space-y-2">
+            <span class="font-label-md text-label-md text-secondary uppercase tracking-wider font-semibold">Fundamentos Estratégicos</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Misión y Visión</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Pilares institucionales que rigen nuestra labor en el Estado Anzoátegui.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            
+            <!-- Misión Card -->
+            <div class="flex flex-col justify-between p-8 rounded-xl bg-surface-container-lowest shadow-sm">
+              <div class="space-y-6">
+                <div class="flex flex-col sm:flex-row items-center justify-center text-center mx-auto gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-secondary text-on-secondary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[26px]">flag</span>
+                  </div>
+                  <div class="text-center items-center flex flex-col">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-center">Compromiso Social</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface text-center">Misión</h3>
+                  </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-surface-container-low text-on-surface">
+                  <p class="font-body-md text-body-md leading-relaxed text-on-surface">
+                    Coordinar acciones interdisciplinarias en pro de la Atención Educativa Integral de calidad de la población ciega y deficiente visual con o sin problemas asociados del Estado Anzoátegui a través de la Atención Directa o como Unidad de Apoyo y Seguimiento, garantizando su integración: Familiar, Escolar, Social y Laboral. Derivadas de las tres (3) líneas estratégicas: Intramodalidad, Intersectorialidad en Intersectorial. Garantizando así su derecho social y protagónico en los cambios requeridos en el desarrollo del país.
+                  </p>
+                </div>
+
+                <!-- 3 Strategic Lines Badges -->
+                <div class="space-y-2.5 text-center">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Líneas Estratégicas:</span>
+                  <div class="flex flex-wrap gap-2 justify-center">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant font-label-md text-label-md font-semibold">
+                      <span class="material-symbols-outlined text-[16px]">account_tree</span>
+                      Intramodalidad
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-label-md text-label-md font-semibold">
+                      <span class="material-symbols-outlined text-[16px]">hub</span>
+                      Intersectorialidad
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-label-md text-label-md font-semibold">
+                      <span class="material-symbols-outlined text-[16px]">connect_without_contact</span>
+                      Intersectorial
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visión Card -->
+            <div class="flex flex-col justify-between p-8 rounded-xl bg-surface-container-lowest shadow-sm">
+              <div class="space-y-6">
+                <div class="flex flex-col sm:flex-row items-center justify-center text-center mx-auto gap-3">
+                  <div class="w-12 h-12 rounded-xl bg-primary-container text-on-secondary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[26px]">visibility</span>
+                  </div>
+                  <div class="text-center items-center flex flex-col">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold text-center">Horizonte Institucional</span>
+                    <h3 class="font-headline-md text-headline-md text-on-surface text-center">Visión</h3>
+                  </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-surface-container-low text-on-surface">
+                  <p class="font-body-md text-body-md leading-relaxed text-on-surface">
+                    El Centro de Atención Integral de Deficiencias Visuales Anzoátegui (CAIDVA), es una Institución adscrita al Ministerio del Poder Popular para la Educación, que brinda Atención Educativa Integral a las personas ciegas y deficientes visuales de todo el Estado Anzoátegui, persigue como fin la articulación, vinculación y coordinación de todos los entes públicos y privados para la formación, capacitación e integración de la población ciega y deficiente visual y su inclusión: Escolar Social y Laboral. Así como incorporar a especialistas altamente calificados como: Psicólogos, Terapistas Ocupacional, Terapistas de Lenguaje entre otros, para complementar el equipo interdisciplinario que conforma el CAIDVA y lograr una Sede propia acorde a las necesidades de la población atendida en dicho Centro.
+                  </p>
+                </div>
+
+                <!-- Interdisciplinary Specialists highlight -->
+                <div class="space-y-2.5">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Equipo Interdisciplinario Integral:</span>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low text-on-surface">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+                      <span class="font-label-md text-label-md font-semibold">Psicología</span>
+                    </div>
+                    <div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low text-on-surface">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">handshake</span>
+                      <span class="font-label-md text-label-md font-semibold">Terapia Ocupacional</span>
+                    </div>
+                    <div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low text-on-surface">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">record_voice_over</span>
+                      <span class="font-label-md text-label-md font-semibold">Terapia de Lenguaje</span>
+                    </div>
+                    <div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-low text-on-surface">
+                      <span class="material-symbols-outlined text-secondary text-[18px]">school</span>
+                      <span class="font-label-md text-label-md font-semibold">Educación Especial</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+</section>
+
+      <!-- Section: Enfoque, Accesibilidad y Llamado a la Acción -->
+      <section class="w-full py-12 md:py-16 px-6 lg:px-12 bg-surface"></section>
 <!-- SECCIÓN 1: ACTIVIDADES BÁSICAS COTIDIANAS -->
-<section class="w-full py-20 bg-surface-container-lowest" id="areas-clave">
+<section id ="actividades-cotidianas" class="w-full py-20 bg-surface-container-lowest">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
@@ -455,7 +766,7 @@
   </div>
 </section>
 <!-- SECCIÓN 2: FORMACIÓN EN TIFLOTECNOLOGÍA -->
-<section class="w-full py-20 bg-surface-container-low">
+<section id="formacion-tiflotecnologia" class="w-full py-20 bg-surface-container-low">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       
@@ -560,7 +871,7 @@
   </div>
 </section>
 <!-- SECCIÓN 3: EDUCACIÓN FÍSICA Y DEPORTE ADAPTADO -->
-    <section class="w-full py-20 bg-surface-container-lowest">
+    <section id="deporte-adaptado" class="w-full py-20 bg-surface-container-lowest">
       <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
@@ -652,7 +963,7 @@
     </section>
 
     <!-- SECCIÓN DE VALORES Y METODOLOGÍA DEL CENTRO -->
-    <section class="w-full py-16 bg-surface-container">
+    <section id="valores-metodologia" class="w-full py-16 bg-surface-container">
       <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-10">
         <div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
           <span class="font-label-md text-label-md uppercase font-bold text-secondary tracking-widest">
