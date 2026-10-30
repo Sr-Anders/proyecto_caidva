@@ -1,59 +1,438 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAIDVA - Portal Inclusivo</title>
-    <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <!-- Barra de Navegación Accesible -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Navegación Principal">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">CAIDVA Anzoátegui</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Cambiar navegación">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('registro') }}">Inscripción</a></li>
-                    {% if session.get('rol') == 'administrador' %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Panel Admin</a></li>
-                        <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Iniciar Sesión</a></li>
-                    {% endif %}
-                </ul>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>CAIDV Anzoátegui</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-primary":"#ffffff","on-background":"#191c1e","on-secondary":"#ffffff","tertiary-fixed-dim":"#b7c8e1","on-tertiary":"#ffffff","surface-container-low":"#f2f4f6","primary-fixed-dim":"#bec6e0","on-secondary-fixed":"#001a42","surface-bright":"#f7f9fb","on-tertiary-fixed":"#0b1c30","primary-container":"#131b2e","primary-fixed":"#dae2fd","on-tertiary-fixed-variant":"#38485d","surface-container":"#eceef0","surface-container-high":"#e6e8ea","on-surface-variant":"#45464d","outline":"#76777d","error-container":"#ffdad6","inverse-surface":"#2d3133","on-error":"#ffffff","outline-variant":"#c6c6cd","tertiary":"#000000","surface-variant":"#e0e3e5","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#3f465c","tertiary-container":"#0b1c30","on-primary-container":"#7c839b","surface-container-highest":"#e0e3e5","surface-dim":"#d8dadc","secondary":"#0058be","on-secondary-fixed-variant":"#004395","on-error-container":"#93000a","error":"#ba1a1a","surface-tint":"#565e74","surface":"#f7f9fb","primary":"#000000","on-secondary-container":"#fefcff","on-surface":"#191c1e","on-primary-fixed":"#131b2e","secondary-fixed-dim":"#adc6ff","inverse-primary":"#bec6e0","inverse-on-surface":"#eff1f3","secondary-container":"#2170e4","on-tertiary-container":"#75859d","background":"#f7f9fb","secondary-fixed":"#d8e2ff","tertiary-fixed":"#d3e4fe"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"stack-lg":"32px","card-padding":"20px","stack-sm":"8px","gutter":"16px","base":"4px","container-margin":"24px","stack-md":"16px"},fontFamily:{"label-md":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"label-sm":["Inter"],"body-md":["Inter"],"headline-md":["Inter"],"headline-lg-mobile":["Inter"],"body-lg":["Inter"]},fontSize:{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed" style="min-height: 100vh; height: auto; overflow-y: auto;"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="bg-surface-container-high px-6 lg:px-12 py-1"><div class="max-w-7xl mx-auto flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant"><div class="flex items-center gap-4"><span class="">Accesibilidad Web Universal</span><span class="hidden sm:inline text-outline-variant">|</span><span class="hidden sm:inline">Atención Integral de Deficiencias Visuales</span></div><div class="flex items-center gap-3"><button class="flex items-center gap-1 hover:text-on-surface transition-colors p-1" title="Modo Alto Contraste" type="button"><span class="material-symbols-outlined text-[16px]">contrast</span><span class="">Alto Contraste</span></button><button class="flex items-center gap-1 hover:text-on-surface transition-colors p-1" title="Ajustar Tamaño de Texto" type="button"><span class="material-symbols-outlined text-[16px]">format_size</span><span class="">Tamaño Texto</span></button><button class="flex items-center gap-1 hover:text-on-surface transition-colors p-1" title="Asistente de Lectura de Pantalla" type="button"><span class="material-symbols-outlined text-[16px]">volume_up</span><span class="">Lector de Voz</span></button></div></div></div><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><a class="flex items-center gap-3 shrink-0 focus:outline-none focus:ring-2 focus:ring-secondary rounded-lg" data-path="inicio" href="#"><div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-on-secondary shadow-sm"><span class="material-symbols-outlined text-[24px]">visibility</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface leading-tight">CAIDVA</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Anzoátegui</span></div></a><nav class="hidden xl:flex items-center gap-6" data-active-classes="text-secondary font-bold"><a aria-current="page" class="transition-colors py-2 text-secondary font-bold" data-path="inicio" href="#">Inicio</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="nosotros" href="#">Nosotros</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="areas-de-formacion" href="#">Áreas de Formación</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="actividades-cotidianas" href="#">Actividades Cotidianas</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="tiflotecnologia" href="#">Tiflotecnología</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors py-2" data-path="deporte-adaptado" href="#">Deporte Adaptado</a></nav><div class="flex items-center gap-4 shrink-0"><a class="bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-label-md text-label-md px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-2" data-path="preinscripcion-en-linea" href="http://127.0.0.1:5000\sProyecto_CAIDVA_ Portal_Web\templates\registro.html"><span class="">Preinscripción en Línea</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<!-- HERO INSTITUCIONAL -->
+<section class="relative w-full bg-surface overflow-hidden py-16 lg:py-24">
+<!-- Acentos gráficos de fondo con contraste medido -->
+<div class="absolute inset-0 pointer-events-none opacity-40">
+<div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-secondary-fixed filter blur-3xl"></div>
+<div class="absolute bottom-0 -left-20 w-80 h-80 rounded-full bg-tertiary-fixed-dim filter blur-3xl"></div>
+</div>
+<div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Barra superior de garantías de accesibilidad institucional -->
+<div class="flex flex-wrap items-center gap-3 mb-8">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+          Institución Pública Gratuita
+        </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">volume_up</span>
+          Lectura por Voz
+        </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">contrast</span>
+          Alto Contraste WCAG 2.1 AAA
+        </span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">accessibility_new</span>
+          Atención Gratuita e Integral
+        </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center gap-2 text-secondary">
+<span class="w-8 h-1 bg-secondary rounded-full"></span>
+<span class="font-label-md text-label-md tracking-wider uppercase font-bold text-secondary">CAIDV Anzoátegui</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight leading-tight">
+            “No miramos por ti, <br class="hidden sm:inline">
+<span class="text-secondary underline decoration-secondary decoration-4 underline-offset-8">te enseñamos a ver</span>”
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+            Contamos con un equipo de profesionales capacitados, altamente comprometidos y con pasión por ayudar y acompañar a personas con deficiencia visual en su desarrollo pleno hacia la autonomía personal, educativa, social y laboral.
+          </p>
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center gap-2 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-label-md text-label-md px-7 py-4 rounded-xl transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-secondary/30" data-path="preinscripcion-en-linea" href="#">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+<a href="registro.html"><span class="">Preinscríbete en Línea</span></a>
+</a>
+<a class="inline-flex items-center gap-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md px-6 py-4 rounded-xl transition-all focus:outline-none focus:ring-4 focus:ring-outline-variant/30" href="#areas-clave">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span class="">Conoce Nuestras Áreas</span>
+</a>
+</div>
+<!-- Métricas Institucionales -->
+<div class="grid grid-cols-3 gap-4 pt-6 mt-4 bg-surface-container-lowest p-5 rounded-2xl shadow-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-secondary">100%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Acompañamiento Gratuito</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">360°</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Habilitación Funcional</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">WCAG</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Accesibilidad Universal</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<!-- Card de bienvenida interactiva institucional -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-xl flex flex-col gap-6 relative z-10">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary shadow-md">
+<span class="material-symbols-outlined text-[28px]">visibility</span>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-sm text-label-sm font-semibold">
+                Estado Anzoátegui
+              </span>
+</div>
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Atención Integral y Especializada</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Nuestro centro ofrece servicios continuos de estimulación visual, psicopedagogía, orientación espacial y preparación vocacional para niños, jóvenes y adultos.
+              </p>
+</div>
+<div class="flex flex-col gap-3 pt-2">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Autonomía Diaria</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Habilidades para el hogar y la comunidad</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Apropiación Digital</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Lectores de pantalla NVDA y JAWS</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">sports</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Inclusión Física</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Goalball, atletismo y recreación sonora</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 1: ACTIVIDADES BÁSICAS COTIDIANAS -->
+<section class="w-full py-20 bg-surface-container-lowest" id="areas-clave">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Columna de imagen -->
+<div class="lg:col-span-5 order-2 lg:order-1 flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-3xl shadow-lg bg-surface-container aspect-[4/3] group">
+<img alt="Adultos con deficiencia visual en la cocina del CAIDV aprendiendo técnicas de preparación de alimentos e independencia culinaria con facilitadores." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE9zD0oyEVyrI-yizVUc7adrkBcSqND21xwt_dj4QtK0yaG3gJxmse87YyWPHdHZj71MTJ0sGo06SRfwc7D638WaGncQ620G2lhxSpCkuolx1SqrE1iteM4n5UAoT5WGFLKI2iF6KrQ4UBUdvJEgbiaVVHGg82eDJ7YF-Bc9fsSS9KxnA1saZJHJkTlgrGgfzRjiTyp8Bvp2SsY78QiHFoUABjiUIG_MEAiYIxeeVTAHq01t-ukYYYwg">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent p-6 text-on-primary">
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase text-secondary-fixed">Práctica en Cocina Adaptada</span>
+<p class="font-body-md text-body-md text-surface-bright mt-1">Técnicas táctiles, hápticas y de seguridad en el hogar.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px]">kitchen</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Entorno real de aprendizaje con estufas, utensilios y estaciones de trabajo seguras.</span>
+</div>
+</div>
+<!-- Columna de información textual -->
+<div class="lg:col-span-7 order-1 lg:order-2 flex flex-col gap-6">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]">room_service</span>
+<span class="font-label-md text-label-md uppercase font-bold tracking-wider">Habilitación para la Vida Diaria</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+            Actividades Básicas Cotidianas
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Esta área permite a las personas con discapacidad visual desarrollar las destrezas y habilidades de forma eficiente en las diversas tareas de la vida cotidiana. La persona podrá realizar las labores más sencillas como el aseo personal hasta actividades más complejas como la preparación de alimentos, permitiendo a su vez la integración familiar, social y laboral.
+          </p>
+<!-- Tarjetas de Aspectos Clave -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">checkroom</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Cuidado Personal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Higiene, alimentación autónoma y técnicas de selección y cuidado del vestido.</p>
+</div>
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">cleaning_services</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Cuidado del Hogar</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Organización espacial, orden de recámaras, limpieza segura y costura elemental.</p>
+</div>
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">soup_kitchen</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Preparación de Alimentos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Técnicas de corte, encender el fuego de forma segura, localizar y utilizar cada utensilio.</p>
+</div>
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">power</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Uso de Materiales Comunes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Identificación de enchufes, llaves, grifería y electrodomésticos convencionales.</p>
+</div>
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Actividades Sociales</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Identificación táctil de billetes y monedas, efectuar compras y desenvolverse en comercio.</p>
+</div>
+<div class="p-5 bg-surface-container-low hover:bg-surface-container transition-colors rounded-2xl flex flex-col gap-2">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold text-base">Actividades de Comunicación</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Uso fluido del teléfono, relojes parlantes/táctiles y gestión del tiempo personal.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 2: FORMACIÓN EN TIFLOTECNOLOGÍA -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Contenido descriptivo -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]">laptop_mac</span>
+<span class="font-label-md text-label-md uppercase font-bold tracking-wider">Innovación y Recursos Tecnológicos</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+            Formación en Tiflotecnología
+          </h2>
+<div class="p-4 bg-surface-container rounded-2xl text-on-surface flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px] shrink-0 mt-0.5">info</span>
+<span class="font-body-md text-body-md">
+              El término <strong>TIFLO-TECNOLOGÍA</strong> proviene del Griego (<strong>TIFLO</strong>) que significa <em>Ciego</em>. Permite al estudiante con discapacidad visual adquirir el conjunto de técnicas, conocimientos y recursos para procurar la correcta utilización de la tecnología.
+            </span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Esta área es impartida con el apoyo de otras organizaciones de y para personas con discapacidad, facilitando talleres, cursos y orientaciones sobre el uso del computador con software lectores de pantalla (NVDA, JAWS), calculadoras parlantes y teléfonos celulares inteligentes con accesibilidad.
+          </p>
+<!-- Lista de Habilidades de Tiflotecnología -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+<div class="flex items-start gap-3 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0">record_voice_over</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Lectores de Pantalla</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Capacitación intensiva en NVDA, JAWS y VoiceOver.</span>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0">keyboard</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Mecanografía y Atajos</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Control fluido del sistema operativo sin monitor visual.</span>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0">smartphone</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Telefonía Inteligente</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Android TalkBack e iOS con gestos de navegación táctil.</span>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0">calculate</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Herramientas Parlantes</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Calculadoras auditivas y software de digitalización OCR.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Imagen de Tiflotecnología -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-3xl shadow-lg bg-surface-container aspect-[4/3] group">
+<img alt="Hombre con deficiencia visual utilizando una computadora portátil con audífonos y software lector de pantalla en el centro de capacitación." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD0Hv-7Y7B2wxRGN6AjWevh-CD3z4BtCupQ0FmhefYjHPNrgUJbY642-Qg3ww2oCokZBnX-7Qn1iX8_rmNe_XzMRhfRZhmUmhs4K0_-5fO8fiyWU-OX7k9fFsPmlCt91D3_44tTjqBvmfRGhQnmF9G5mVCBl1gaKe3hAVDCjk7H1XJUS6bO_InU1vpxbyqYGQKYhIHBuISBMo1ztejX2PZ9t3aKcr8vs2wiNkAcX8HBfBCE-oZLOGjEA">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent p-6 text-on-primary">
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase text-secondary-fixed">Autonomía en la Era Digital</span>
+<p class="font-body-md text-body-md text-surface-bright mt-1">Acceso integral a la educación universitaria e inserción laboral.</p>
+</div>
+</div>
+<div class="p-5 bg-surface-container-lowest rounded-2xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">headphones</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Software NVDA &amp; JAWS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Instalación y soporte para alumnos</span>
+</div>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" data-path="tiflotecnologia" href="#">
+<span class="">Saber más</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 3: EDUCACIÓN FÍSICA Y DEPORTE ADAPTADO -->
+<section class="w-full py-20 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Columna de Imagen -->
+<div class="lg:col-span-5 order-2 lg:order-1 flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-3xl shadow-lg bg-surface-container aspect-[4/3] group">
+<img alt="Atletas con discapacidad visual compitiendo en un partido de goalball en cancha techada con balón sonoro y marcas táctiles en el suelo." class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrAy_m6TpXwA1hLL8jeyf8IC8jekleZVp97TehBHWLgkLA-c0knROSx8NyFQj75ZLygF0p_pb_3qVM8iQiZk9slDf54PfQnwcQOF53T3yUPukv9jUYeZH7zB7VfLfgkfzcufQeQbkxEaJAf4pd-0BIOf1qcgIS1ao-TmEBOMkYEW39qR1lZFhlGHgSq41aAg820pKl5H7CDROBfaL6hmMRXTIGHBXKmCCoPmKeECYDHf58GrI4CoHRXQ">
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent p-6 text-on-primary">
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase text-secondary-fixed">Goalball y Deporte Sonoro</span>
+<p class="font-body-md text-body-md text-surface-bright mt-1">Disciplina paralímpica exclusiva con balón sonoro y orientación espacial.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px]">workspace_premium</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Desarrollo de reflejos, confianza espacial, trabajo en equipo y condición física.</span>
+</div>
+</div>
+<!-- Columna de Texto -->
+<div class="lg:col-span-7 order-1 lg:order-2 flex flex-col gap-6">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+<span class="font-label-md text-label-md uppercase font-bold tracking-wider">Habilitación Motriz y Competitiva</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+            Educación Física y Deporte Adaptado
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Son actividades deportivas en las que se aplican ciertas reglas para que las personas con discapacidad visual puedan participar, siendo estas adaptaciones mínimas para evitar perder la esencia del deporte. Entre estos se practica el Atletismo, Goalball, Natación, y actividades recreativas como Dominó y Ajedrez adaptados.
+          </p>
+<!-- Bloque de Características Relevantes -->
+<div class="flex flex-col gap-3 pt-2">
+<div class="p-4 bg-surface-container-low rounded-2xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">sports_soccer</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-md text-label-md font-bold text-on-surface">Reglas Adaptadas Rigurosamente</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Minuciosamente diseñadas para personas con baja visión y ceguera total, empleando antifaces para igualdad de condiciones y señales sonoras reglamentarias.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">category</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-md text-label-md font-bold text-on-surface">Clasificación Funcional Oficial</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Categorización médica visual (B1, B2 y B3) para garantizar equidad competitiva y desarrollo biomecánico según potencial.</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-2xl flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">emoji_events</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-md text-label-md font-bold text-on-surface">Máxima Expresión Atlética</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Preparación para eventos regionales, Juegos Paralímpicos y torneos nacionales adaptados en disciplinas individuales y de conjunto.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN DE VALORES Y METODOLOGÍA DEL CENTRO -->
+<section class="w-full py-16 bg-surface-container">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col gap-10">
+<div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
+<span class="font-label-md text-label-md uppercase font-bold text-secondary tracking-widest">Enfoque Integral Humanista</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold">¿Por qué el modelo de atención CAIDVA es referente?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Nuestro objetivo primordial es dotar a cada participante de las herramientas necesarias para desenvolverse con absoluta seguridad y dignidad en su entorno natural.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-[24px]">blind</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Orientación y Movilidad</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Uso correcto del bastón blanco, rastreo táctil, puntos de referencia auditivos y desplazamientos seguros por vías públicas de la ciudad.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-[24px]">dialpad</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Sistema Braille Integral</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Lectoescritura en relieve, signografía matemática, música y adaptaciones de textos educativos para garantizar el derecho a la lectura.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-[24px]">family_restroom</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Integración Familiar y Laboral</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Asesoría psicológica constante a familias y redes de apoyo, eliminando barreras sociales y promoviendo la inclusión productiva.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- LLAMADO A LA ACCIÓN (CTA FINAL) Y CONTACTO DIRECTO -->
+<section class="w-full py-20 bg-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<div class="bg-secondary-container text-on-secondary-container rounded-3xl p-10 lg:p-16 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-10">
+<div class="flex flex-col gap-4 max-w-2xl">
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary-fixed font-bold">Registro Abierto y Continuo</span>
+<h2 class="font-headline-lg text-headline-lg font-extrabold text-on-secondary-container leading-tight">
+            ¿Deseas formar parte del CAIDV Anzoátegui o inscribir a un familiar?
+          </h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container/90 leading-relaxed">
+            Hemos habilitado nuestro portal de preinscripción en línea de manera ágil, sencilla y digitalizada. Accede desde cualquier dispositivo con compatibilidad para lectores de pantalla.
+          </p>
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<a class="inline-flex items-center gap-2 bg-on-secondary-container hover:bg-surface-bright text-secondary font-headline-sm text-headline-sm px-8 py-4 rounded-xl transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-on-secondary-container/40" data-path="preinscripcion-en-linea" href="#">
+<span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+<span class="">Iniciar Preinscripción</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-label-md text-label-md px-6 py-4 rounded-xl transition-all" data-path="portal-de-acceso" href="#">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+<span class="">Portal Administrativo</span>
+</a>
+</div>
+</div>
+<!-- Tarjeta de Contacto Inmediato -->
+<div class="w-full lg:w-96 bg-surface-container-lowest text-on-surface p-8 rounded-2xl shadow-lg flex flex-col gap-5 shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">contact_support</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface text-base">Atención Directa</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sede Barcelona, Anzoátegui</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 pt-2 font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5 shrink-0">location_on</span>
+<span class="">Barcelona, Municipio Simón Bolívar, Estado Anzoátegui</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0">call</span>
+<span class="font-semibold text-on-surface">+58 (281) 270-4100</span>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0">schedule</span>
+<span class="">Lunes a Viernes: 8:00 AM - 4:00 PM</span>
+</div>
+</div>
+<div class="pt-2">
+<div class="p-3 bg-surface-container-low rounded-xl flex items-center justify-center text-center font-label-sm text-label-sm text-on-surface-variant font-medium">
+              Acompañamiento sin costo para todo el Estado Anzoátegui
             </div>
-        </div>
-    </nav>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low mt-16"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"><div class="flex flex-col gap-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-on-secondary"><span class="material-symbols-outlined text-[20px]">visibility</span></div><span class="font-headline-sm text-headline-sm text-on-surface">CAIDVA</span></div><p class="font-body-md text-body-md text-on-surface-variant">Centro de Atención Integral de Deficiencias Visuales del Estado Anzoátegui. Comprometidos con la autonomía, educación inclusiva y habilitación funcional integral.</p></div><div class="flex flex-col gap-3"><h4 class="font-headline-sm text-headline-sm text-on-surface">Programas</h4><nav class="flex flex-col gap-2 font-body-md text-body-md"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="areas-de-formacion" href="#">Orientación y Movilidad</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="areas-de-formacion" href="#">Sistema Braille y Signografía</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="actividades-cotidianas" href="#">Actividades de la Vida Diaria</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="tiflotecnologia" href="#">Tiflotecnología y Lectores</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="deporte-adaptado" href="#">Goalball y Deporte Adaptado</a></nav></div><div class="flex flex-col gap-3"><h4 class="font-headline-sm text-headline-sm text-on-surface">Institucional</h4><nav class="flex flex-col gap-2 font-body-md text-body-md"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="inicio" href="#">Inicio</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="nosotros" href="#">Acerca de CAIDV</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="preinscripcion-en-linea" href="#">Preinscripción de Estudiantes</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="portal-de-acceso" href="#">Portal de Acceso Administrativo</a></nav></div><div class="flex flex-col gap-3"><h4 class="font-headline-sm text-headline-sm text-on-surface">Contacto Directo</h4><div class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant"><div class="flex items-start gap-2"><span class="material-symbols-outlined text-[20px] text-secondary mt-0.5">location_on</span><span class="">Barcelona, Estado Anzoátegui, República Bolivariana de Venezuela</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[20px] text-secondary">mail</span><span class="">atencion@caidvanzoategui.gob.ve</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[20px] text-secondary">call</span><span class="">+58 (281) 270-4100</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[20px] text-secondary">schedule</span><span class="">Lunes a Viernes: 8:00 AM - 4:00 PM</span></div></div></div></div><div class="mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body-md text-body-md text-on-surface-variant"><p class="">© 2025 CAIDV Anzoátegui. Todos los derechos reservados. Plataforma adaptada a pautas de accesibilidad WCAG 2.1 AA.</p><div class="flex items-center gap-6"><a class="hover:text-on-surface transition-colors" href="#">Términos de Servicio</a><a class="hover:text-on-surface transition-colors" href="#">Política de Privacidad</a><a class="hover:text-on-surface transition-colors" href="#">Declaración de Accesibilidad</a></div></div></div></footer>
 
-    <!-- Contenido Dinámico -->
-    <main class="container my-5" id="contenido-principal">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        {% block content %}{% endblock %}
-    </main>
-
-    <!-- Pie de página -->
-    <footer class="bg-dark text-white text-center py-4 mt-auto" role="contentinfo">
-        <div class="container">
-            <p class="mb-0">Centro de Atención Integral de Deficiencias Visuales Anzoátegui (CAIDVA)[cite: 7]. Barcelona, Edo. Anzoátegui[cite: 8].</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap 5 JS Bundle CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</body></html>

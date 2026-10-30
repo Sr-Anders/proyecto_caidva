@@ -1,3 +1,4 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "livePreview.defaultPreviewPath": "/Proyecto_CAIDVA_ Portal_Web/templates/index.html"
 }
