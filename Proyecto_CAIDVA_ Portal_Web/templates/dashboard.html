@@ -116,9 +116,9 @@
           <p class="font-bold text-slate-900 text-xs truncate">Dra. M. Ramos</p>
           <p class="text-slate-500 text-[11px] truncate">Administradora General</p>
         </div>
-        <button class="text-slate-400 hover:text-rose-600 p-1 rounded-md hover:bg-white transition-colors" title="Cerrar sesión" type="button">
+        <a href="{{ url_for('logout') }}" class="text-slate-400 hover:text-rose-600 p-1 rounded-md hover:bg-white transition-colors" title="Cerrar sesión">
           <span class="material-symbols-outlined text-[18px]">logout</span>
-        </button>
+        </a>
       </div>
     </div>
   </aside>
@@ -305,177 +305,21 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 bg-white" id="alumnos-table-body">
-              
-              <!-- Student 1: Elena Rodríguez -->
-              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Ceguera Total" data-search="elena rodríguez pérez v-29.450.812 ceguera total adquirida orientacion movilidad 0416-5542190">
-                <td class="py-4 px-5 whitespace-nowrap">
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Elena María</span>
-                  </div>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Rodríguez Pérez</span></td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-29.450.812</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">18 años</span>
-                  <span class="text-[11px] text-slate-400">14/06/2006</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0416-5542190">
-                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
-                    0416-5542190
-                  </a>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <div class="inline-flex items-center justify-center gap-1.5">
-                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
-                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
-                      Ver Ficha
-                    </button>
-                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
-                      <span class="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Student 2: Carlos Mendoza -->
-              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Braille" data-search="carlos mendoza soto v-19.821.405 retinopatia prematuro braille integral 0414-8291048">
-                <td class="py-4 px-5 whitespace-nowrap">
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Carlos Alberto</span>
-                  </div>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Mendoza Soto</span></td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-19.821.405</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">27 años</span>
-                  <span class="text-[11px] text-slate-400">12/03/1997</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0414-8291048">
-                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
-                    0414-8291048
-                  </a>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <div class="inline-flex items-center justify-center gap-1.5">
-                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
-                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
-                      Ver Ficha
-                    </button>
-                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
-                      <span class="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Student 3: Sofía Valera -->
-              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Baja Visión" data-search="sofía valera navarro v-27.189.332 stargardt baja vision severa macrolectura 0412-9983144">
-                <td class="py-4 px-5 whitespace-nowrap">
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Sofía Alejandra</span>
-                  </div>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Valera Navarro</span></td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-27.189.332</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">22 años</span>
-                  <span class="text-[11px] text-slate-400">03/02/2002</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0412-9983144">
-                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
-                    0412-9983144
-                  </a>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <div class="inline-flex items-center justify-center gap-1.5">
-                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
-                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
-                      Ver Ficha
-                    </button>
-                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
-                      <span class="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Student 4: Juan Gómez -->
-              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Tiflotecnología" data-search="juan gómez quintero v-24.819.304 glaucoma congenito tiflotecnologia lectores pantalla 0424-8193021">
-                <td class="py-4 px-5 whitespace-nowrap">
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Juan Manuel</span>
-                  </div>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Gómez Quintero</span></td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-24.819.304</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">24 años</span>
-                  <span class="text-[11px] text-slate-400">22/09/2000</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0424-8193021">
-                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
-                    0424-8193021
-                  </a>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <div class="inline-flex items-center justify-center gap-1.5">
-                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
-                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
-                      Ver Ficha
-                    </button>
-                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
-                      <span class="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Student 5: Diego Morales -->
-              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Braille" data-search="diego morales rivas v-26.331.415 atrofia optica bilateral estimulacion visual braille 0424-7712390">
-                <td class="py-4 px-5 whitespace-nowrap">
-                  <div class="flex items-center gap-3">
-                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Diego Andrés</span>
-                  </div>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Morales Rivas</span></td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-26.331.415</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">23 años</span>
-                  <span class="text-[11px] text-slate-400">18/07/2001</span>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0424-7712390">
-                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
-                    0424-7712390
-                  </a>
-                </td>
-                <td class="py-4 px-4 whitespace-nowrap text-center">
-                  <div class="inline-flex items-center justify-center gap-1.5">
-                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
-                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
-                      Ver Ficha
-                    </button>
-                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
-                      <span class="material-symbols-outlined text-[18px]">edit</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
+              {% for alumno in alumnos %}
+                <tr>
+                  <td class="py-3.5 px-5 text-sm text-slate-700">{{ alumno.NomAlum }}</td>
+                  <td class="py-3.5 px-4 text-sm text-slate-700">{{ alumno.ApeAlum }}</td>
+                  <td class="py-3.5 px-4 text-sm text-slate-700">{{ alumno.CedAlum }}</td>
+                  <td class="py-3.5 px-4 text-sm text-slate-700">{{ alumno.FecNacAlum }}</td>
+                  <td class="py-3.5 px-4 text-sm text-slate-700">{{ alumno.NumTelAlum }}</td>
+                  <td class="py-3.5 px-4 text-sm text-slate-700">
+                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                      Activo
+                    </span>
+                  </td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

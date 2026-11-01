@@ -118,7 +118,8 @@ def dashboard():
     if 'rol' in session and session['rol'] == 'administrador':
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM alumno")
+        
+        cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno")
         alumnos = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -158,7 +159,8 @@ def generar_pdf():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    flash('Sesión cerrada exitosamente.', 'success')    
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000,debug=False)
+    app.run(host="0.0.0.0", port=5000,debug=True)
