@@ -55,12 +55,13 @@ def login():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        correo = request.form['correo']
-        password = request.form['password']
+        nombres_alum = request.form['nombres_alum']
+        apellidos_alum = request.form['apellidos_alum']
         ced_alum = request.form['ced_alum']
         fec_nac = request.form['fec_nac']
         linea_atencion = request.form['linea_atencion']
         tel_alum = request.form['tel_alum']
+
         
         # Manejo del archivo del informe médico
         file = request.files.get('informe_medico')
@@ -76,13 +77,11 @@ def registro():
         cursor = conn.cursor()
         try:
             # 1. Crear el usuario para poder iniciar sesión posteriormente
-            cursor.execute("""
-                INSERT INTO usuario (correo, password, rol) 
-                VALUES (%s, %s, %s)
-            """, (correo, password, 'usuario'))
+           
 
-            cod_ins_edu = None
+            
             grado_con_alum = linea_atencion
+            cod_ins_edu = None
 
             # 2. Si seleccionó Integración Escolar, guardamos los datos del instituto
             if linea_atencion == "Integración Escolar":
@@ -99,15 +98,14 @@ def registro():
 
             # 3. Guardar los datos del estudiante
             cursor.execute("""
-                INSERT INTO alumno (CedAlum, CodInsEdu, FecNacAlum, GradoConAlum, InfMedAlum, NumTelAlum) 
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (ced_alum, cod_ins_edu, fec_nac, grado_con_alum, inf_med_path, tel_alum))
-            
+                INSERT INTO alumno (NomAlum, ApeAlum, CedAlum, CodInsEdu, FecNacAlum, GradoConAlum, InfMedAlum, NumTelAlum) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """, (nombres_alum, apellidos_alum, ced_alum, cod_ins_edu, fec_nac, grado_con_alum, inf_med_path, tel_alum))
             conn.commit()
             flash('¡Registro completado con éxito! Ahora puede iniciar sesión con su correo y contraseña.', 'success')
-            return redirect(url_for('login'))
         except Exception as e:
             conn.rollback()
+            print(f"ERROR CRÍTICO EN BD: {str(e)}")
             flash(f'Error en el registro: {e}', 'danger')
         finally:
             cursor.close()

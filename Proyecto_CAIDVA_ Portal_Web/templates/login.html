@@ -1,121 +1,286 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>CAIDVA - Centro de Atención Integral de Deficiencias Visuales</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#7c839b","background":"#f7f9fb","surface-container-low":"#f2f4f6","inverse-on-surface":"#eff1f3","on-secondary-fixed-variant":"#004395","inverse-primary":"#bec6e0","on-tertiary":"#ffffff","on-error-container":"#93000a","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#b7c8e1","outline":"#76777d","on-background":"#191c1e","on-tertiary-container":"#75859d","secondary-fixed-dim":"#adc6ff","on-secondary":"#ffffff","surface-tint":"#565e74","surface-container-high":"#e6e8ea","on-primary-fixed-variant":"#3f465c","primary-fixed-dim":"#bec6e0","surface-variant":"#e0e3e5","primary":"#000000","error":"#ba1a1a","secondary-fixed":"#d8e2ff","primary-fixed":"#dae2fd","on-tertiary-fixed-variant":"#38485d","on-surface":"#191c1e","on-primary":"#ffffff","on-primary-fixed":"#131b2e","primary-container":"#131b2e","inverse-surface":"#2d3133","surface-container":"#eceef0","tertiary":"#000000","surface-dim":"#d8dadc","surface":"#f7f9fb","surface-container-highest":"#e0e3e5","surface-bright":"#f7f9fb","on-error":"#ffffff","secondary":"#0058be","on-surface-variant":"#45464d","outline-variant":"#c6c6cd","secondary-container":"#2170e4","on-tertiary-fixed":"#0b1c30","error-container":"#ffdad6","on-secondary-fixed":"#001a42","tertiary-container":"#0b1c30","tertiary-fixed":"#d3e4fe","on-secondary-container":"#fefcff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"base":"4px","stack-lg":"32px","stack-md":"16px","container-margin":"24px","stack-sm":"8px","card-padding":"20px","gutter":"16px"},"fontFamily":{"headline-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"],"label-md":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"]},"fontSize":{"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md text-body-md"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-4"><div class="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-on-secondary shadow-sm"><span class="material-symbols-outlined text-[24px]">visibility</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">CAIDVA</span><span class="font-label-sm text-label-sm text-on-surface-variant tracking-normal mt-0.5">Centro de Atención Integral de Deficiencias Visuales</span></div></div><nav class="hidden md:flex items-center gap-2" data-active-classes="bg-surface-container text-on-surface font-semibold rounded-lg"><a aria-current="page" class="px-3 py-2 transition-colors bg-surface-container text-on-surface font-semibold rounded-lg" data-path="portal-de-acceso" href="#">Portal de Acceso</a><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="recuperacion-de-credenciales" href="#">Recuperación de Credenciales</a><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="soporte-y-accesibilidad" href="#">Soporte y Accesibilidad</a></nav><div class="flex items-center gap-3"><div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md"><span class="material-symbols-outlined text-[16px]">lock</span><span class="text-[11px] font-medium">Acceso Seguro SSL</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 flex-grow bg-surface flex flex-col items-center justify-center px-6 lg:px-12 py-10"><div class="flex flex-col w-full">
-<div class="w-full max-w-5xl mx-auto py-4 sm:py-8 lg:py-12 flex flex-col items-center">
-<!-- Institutional Notification / Accessibility Strip -->
-<div class="w-full max-w-md mb-6 px-4 py-2.5 rounded-full bg-surface-container-low shadow-sm flex items-center justify-between gap-3 text-on-surface-variant">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
-<span class="font-label-md text-label-md tracking-normal">Portal Oficial • Servidor Central Seguro</span>
-</div>
-<div class="flex items-center gap-1.5 text-on-surface-variant">
-<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-<span class="font-label-sm text-label-sm">En Línea</span>
-</div>
-</div>
-<!-- Main Container Card -->
-<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-xl p-6 sm:p-8 relative">
-<!-- Institutional Identity & Subtitle -->
-<div class="flex flex-col items-center text-center mb-8">
-<div class="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center text-on-secondary shadow-md mb-4">
-<span class="material-symbols-outlined text-[30px]">local_hospital</span>
-</div>
-<span class="font-label-md text-label-md text-secondary tracking-widest uppercase mb-1">Módulo de Autenticación</span>
-<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Iniciar Sesión</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
-          Ingrese sus credenciales de acceso para gestionar expedientes y registros.
-        </p>
-</div>
-<!-- Strict Backend Fidelity Form -->
-<form class="flex flex-col gap-5" method="POST">
-<!-- Correo Electrónico Input Group -->
-<div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="correo">
-<span class="">Correo Electrónico</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Requerido</span>
-</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none transition-colors">
-              mail
-            </span>
-<input autocomplete="email" class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg py-3 pl-11 pr-4 outline-none transition-all shadow-sm focus:bg-surface-container-lowest focus:shadow-md" id="correo" name="correo" placeholder="admin@caidva.org" required="" type="email">
-</div>
-</div>
-<!-- Contraseña Input Group -->
-<div class="flex flex-col gap-1.5">
-<div class="flex items-center justify-between">
-<label class="font-label-md text-label-md text-on-surface font-semibold" for="password">
-              Contraseña
-            </label>
-<a class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-fixed-variant transition-colors" data-path="recuperacion-de-credenciales" href="#">
-              ¿Olvidó su contraseña?
-            </a>
-</div>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none transition-colors">
-              lock
-            </span>
-<input autocomplete="current-password" class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg py-3 pl-11 pr-11 outline-none transition-all shadow-sm focus:bg-surface-container-lowest focus:shadow-md" id="password" name="password" placeholder="••••••••••••" required="" type="password">
-<button aria-label="Alternar visibilidad de contraseña" class="absolute right-3 p-1 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center cursor-pointer" id="toggle-password-btn" type="button">
-<span class="material-symbols-outlined text-[20px]" id="password-visibility-icon">
-                visibility
-              </span>
-</button>
-</div>
-</div>
-<!-- Session Persistence -->
-<div class="flex items-center justify-between py-1">
-<label class="flex items-center gap-2.5 cursor-pointer select-none">
-<input class="w-4 h-4 rounded text-secondary bg-surface-container focus:ring-0 focus:outline-none cursor-pointer" id="remember_me" name="remember_me" type="checkbox">
-<span class="font-body-md text-body-md text-on-surface">Recordar sesión activa</span>
-</label>
-<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">shield</span> 30 días
-          </span>
-</div>
-<!-- Exact Submit Button -->
-<button class="w-full mt-2 py-3.5 px-6 rounded-lg bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.99] cursor-pointer" type="submit">
-<span class="">Entrar al Sistema</span>
-<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-</button>
-</form>
-<!-- Registration Module Direct Link -->
-<div class="mt-8 pt-6 bg-surface-container-low/50 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 p-6 rounded-b-xl flex flex-col items-center gap-2 text-center">
-<span class="font-body-md text-body-md text-on-surface-variant">
-          ¿No tiene cuenta habilitada en CAIDVA?
-        </span>
-<a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-secondary hover:text-on-secondary-fixed-variant transition-colors font-semibold py-1 px-3 rounded-lg hover:bg-surface-container" data-path="portal-de-acceso" href="#">
-<span class="material-symbols-outlined text-[16px]">how_to_reg</span>
-<span class="">Registrar nuevo estudiante o tutor</span>
-</a>
-</div>
-</div>
-<!-- Accessibility Guarantee Features -->
-<div class="w-full max-w-md mt-6 grid grid-cols-2 gap-3 text-center">
-<div class="p-3 rounded-lg bg-surface-container-low shadow-sm flex flex-col items-center">
-<span class="material-symbols-outlined text-[20px] text-secondary mb-1">volume_up</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">Lectores de Pantalla</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Compatible con NVDA y JAWS</span>
-</div>
-<div class="p-3 rounded-lg bg-surface-container-low shadow-sm flex flex-col items-center">
-<span class="material-symbols-outlined text-[20px] text-secondary mb-1">contrast</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">Contraste AAA</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Norma WCAG 2.1 garantizada</span>
-</div>
-</div>
-</div>
-</div>
-<script>
-  (function() {
-    const passwordInput = document.getElementById('password');
-    const toggleBtn = document.getElementById('toggle-password-btn');
-    const toggleIcon = document.getElementById('password-visibility-icon');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="web_standard" name="shell-type">
+  <title>CAIDVA - Centro de Atención Integral de Deficiencias Visuales</title>
+  
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 
-    if (toggleBtn && passwordInput && toggleIcon) {
-      toggleBtn.addEventListener('click', function() {
-        const isPassword = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-        toggleIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
-      });
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      main > :first-child {
+        margin-top: 0 !important;
+      }
+      main > :last-child {
+        margin-bottom: 0 !important;
+      }
     }
-  })();
-</script></main><footer class="w-full bg-surface-container-lowest mt-auto shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex flex-col items-center md:items-start text-center md:text-left gap-1"><p class="font-label-md text-label-md text-on-surface font-semibold">CAIDVA • Sistema de Gestión Institucional</p><p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Centro de Atención Integral de Deficiencias Visuales. Todos los derechos reservados.</p></div><div class="flex flex-wrap items-center justify-center gap-6"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="politica-de-privacidad-y-aviso-legal" href="#">Privacidad y Términos</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1" data-path="guia-de-accesibilidad" href="#"><span class="material-symbols-outlined text-[15px]">accessibility_new</span>Accesibilidad Universal</a><span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Mesa de Ayuda: soporte@caidva.org</span></div></div></footer></body></html>
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#7c839b",
+            "background": "#f7f9fb",
+            "surface-container-low": "#f2f4f6",
+            "inverse-on-surface": "#eff1f3",
+            "on-secondary-fixed-variant": "#004395",
+            "inverse-primary": "#bec6e0",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#b7c8e1",
+            "outline": "#76777d",
+            "on-background": "#191c1e",
+            "on-tertiary-container": "#75859d",
+            "secondary-fixed-dim": "#adc6ff",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#565e74",
+            "surface-container-high": "#e6e8ea",
+            "on-primary-fixed-variant": "#3f465c",
+            "primary-fixed-dim": "#bec6e0",
+            "surface-variant": "#e0e3e5",
+            "primary": "#000000",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#d8e2ff",
+            "primary-fixed": "#dae2fd",
+            "on-tertiary-fixed-variant": "#38485d",
+            "on-surface": "#191c1e",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#131b2e",
+            "primary-container": "#131b2e",
+            "inverse-surface": "#2d3133",
+            "surface-container": "#eceef0",
+            "tertiary": "#000000",
+            "surface-dim": "#d8dadc",
+            "surface": "#f7f9fb",
+            "surface-container-highest": "#e0e3e5",
+            "surface-bright": "#f7f9fb",
+            "on-error": "#ffffff",
+            "secondary": "#0058be",
+            "on-surface-variant": "#45464d",
+            "outline-variant": "#c6c6cd",
+            "secondary-container": "#2170e4",
+            "on-tertiary-fixed": "#0b1c30",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#001a42",
+            "tertiary-container": "#0b1c30",
+            "tertiary-fixed": "#d3e4fe",
+            "on-secondary-container": "#fefcff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "base": "4px",
+            "stack-lg": "32px",
+            "stack-md": "16px",
+            "container-margin": "24px",
+            "stack-sm": "8px",
+            "card-padding": "20px",
+            "gutter": "16px"
+          },
+          "fontFamily": {
+            "headline-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+            "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md text-body-md">
+  
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="{{ url_for('index') }}" aria-label="Volver al inicio" title="Volver al inicio" class="p-2 -ml-2 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center justify-center cursor-pointer">
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </a>
+        <div class="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-on-secondary shadow-sm">
+          <span class="material-symbols-outlined text-[24px]">visibility</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">CAIDVA</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant tracking-normal mt-0.5">Centro de Atención Integral de Deficiencias Visuales</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-2 ml-auto justify-end" data-active-classes="bg-surface-container text-on-surface font-semibold rounded-lg">
+        <a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="recuperacion-de-credenciales" href="#">Recuperación de Credenciales</a>
+        <a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-md text-body-md" data-path="soporte-y-accesibilidad" href="#">Soporte y Accesibilidad</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="w-full pt-20 flex-grow bg-surface flex flex-col items-center justify-center px-6 lg:px-12 py-4">
+    <div class="flex flex-col w-full">
+      <div class="w-full max-w-5xl mx-auto py-4 flex flex-col items-center">
+        
+        <!-- Main Container Card -->
+        <div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-xl p-6 sm:p-8 relative">
+          
+          <!-- Institutional Identity & Subtitle -->
+          <div class="flex flex-col items-center text-center mb-8">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center text-on-primary shadow-md mb-4 bg-secondary">
+              <span class="material-symbols-outlined text-[30px]">visibility</span>
+            </div>
+            <span class="font-label-md text-label-md text-secondary tracking-widest uppercase mb-1">Módulo de Autenticación para administradores</span>
+            <h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Iniciar Sesión</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              Ingrese sus credenciales de acceso para gestionar expedientes y registros.
+            </p>
+          </div>
+
+          <!-- Form -->
+          <form class="flex flex-col gap-5" method="POST">
+            
+            <!-- Correo Electrónico Input Group -->
+            <div class="flex flex-col gap-1.5">
+              <label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="correo">
+                <span>Correo Electrónico</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Requerido</span>
+              </label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none transition-colors">
+                  mail
+                </span>
+                <input autocomplete="email" class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg py-3 pl-11 pr-4 outline-none transition-all shadow-sm focus:bg-surface-container-lowest focus:shadow-md" id="correo" name="correo" placeholder="admin@caidva.org" required="" type="email">
+              </div>
+            </div>
+
+            <!-- Contraseña Input Group -->
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center justify-between">
+                <label class="font-label-md text-label-md text-on-surface font-semibold" for="password">
+                  Contraseña
+                </label>
+                <a class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-fixed-variant transition-colors" data-path="recuperacion-de-credenciales" href="#">
+                  ¿Olvidó su contraseña?
+                </a>
+              </div>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none transition-colors">
+                  lock
+                </span>
+                <input autocomplete="current-password" class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md rounded-lg py-3 pl-11 pr-11 outline-none transition-all shadow-sm focus:bg-surface-container-lowest focus:shadow-md" id="password" name="password" placeholder="••••••••••••" required="" type="password">
+                <button aria-label="Alternar visibilidad de contraseña" class="absolute right-3 p-1 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center cursor-pointer" id="toggle-password-btn" type="button">
+                  <span class="material-symbols-outlined text-[20px]" id="password-visibility-icon">
+                    visibility
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Session Persistence -->
+            <div class="flex items-center justify-between py-1">
+              <label class="flex items-center gap-2.5 cursor-pointer select-none">
+                <input class="w-4 h-4 rounded text-secondary bg-surface-container focus:ring-0 focus:outline-none cursor-pointer" id="remember_me" name="remember_me" type="checkbox">
+                <span class="font-body-md text-body-md text-on-surface">Recordar sesión activa</span>
+              </label>
+              <span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">shield</span> 30 días
+              </span>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="w-full mt-2 py-3.5 px-6 rounded-lg bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.99] cursor-pointer" type="submit">
+              <span>Entrar al Sistema</span>
+              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </button>
+          </form>
+
+          <!-- Registration Link -->
+          <div class="mt-8 pt-6 bg-surface-container-low/50 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 p-6 rounded-b-xl flex flex-col items-center gap-2 text-center">
+            <span class="font-body-md text-body-md text-on-surface-variant">
+              ¿No tiene cuenta?
+            </span>
+            <a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-secondary hover:text-on-secondary-fixed-variant transition-colors font-semibold py-1 px-3 rounded-lg hover:bg-surface-container" data-path="portal-de-acceso" href="#">
+              <span class="material-symbols-outlined text-[16px]">how_to_reg</span>
+              <span>Registrar nuevo administrador</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Toggle Password Visibility Script -->
+    <script>
+      (function() {
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('toggle-password-btn');
+        const toggleIcon = document.getElementById('password-visibility-icon');
+
+        if (toggleBtn && passwordInput && toggleIcon) {
+          toggleBtn.addEventListener('click', function() {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            toggleIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+          });
+        }
+      })();
+    </script>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface-container-lowest mt-auto shadow-[0_-1px_6px_rgba(0,0,0,0.03)]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 py-4">
+      <div class="flex flex-col items-center md:items-start text-center md:text-left gap-1">
+        <p class="font-label-md text-label-md text-on-surface font-semibold">CAIDVA • Sistema de Gestión Institucional</p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Centro de Atención Integral de Deficiencias Visuales. Todos los derechos reservados.</p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="politica-de-privacidad-y-aviso-legal" href="#">Privacidad y Términos</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1" data-path="guia-de-accesibilidad" href="#">
+          <span class="material-symbols-outlined text-[15px]">accessibility_new</span>Accesibilidad Universal
+        </a>
+        <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">•</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Mesa de Ayuda: soporte@caidva.org</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

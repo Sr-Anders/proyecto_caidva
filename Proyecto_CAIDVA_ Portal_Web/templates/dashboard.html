@@ -1,39 +1,616 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 text-primary">Panel de Control Administrativo - CAIDVA</h1>
-    <a href="{{ url_for('generar_pdf') }}" class="btn btn-danger" aria-label="Descargar reporte oficial en formato PDF">Descargar Reporte PDF</a>
-</div>
+<!DOCTYPE html>
+<html class="h-full bg-slate-50 text-slate-800" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Panel de Control Administrativo - CAIDVA Anzoátegui</title>
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 
-<div class="card shadow border-0 p-4">
-    <h3 class="h5 text-dark mb-3">Lista de Estudiantes Registrados</h3>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead class="table-primary">
-                <tr>
-                    <th>Cédula</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Grado / Línea</th>
-                    <th>Información Médica</th>
-                    <th>Teléfono</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for alum in alumnos %}
-                <tr>
-                    <td>{{ alum.CedAlum }}</td>
-                    <td>{{ alum.FecNacAlum }}</td>
-                    <td>{{ alum.GradoConAlum }}</td>
-                    <td>{{ alum.InfMedAlum }}</td>
-                    <td>{{ alum.NumTelAlum }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted">No hay estudiantes registrados todavía.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col md:flex-row w-full overflow-x-hidden antialiased">
+  
+  <!-- Mobile Backdrop Overlay (Hidden by default) -->
+  <div class="fixed inset-0 bg-slate-900/40 z-30 md:hidden transition-opacity hidden" id="mobile-backdrop" onclick="toggleSidebarMobile()"></div>
+
+  <!-- Sidebar CAIDVA -->
+  <aside class="w-64 shrink-0 bg-white border-r border-slate-200 flex flex-col z-40 fixed md:sticky top-0 h-screen transition-transform duration-300 ease-in-out md:translate-x-0 -translate-x-full" id="sidebar">
+    
+    <!-- Header Brand -->
+    <div class="h-16 px-5 border-b border-slate-200 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3 overflow-hidden">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm shrink-0">
+          C
+        </div>
+        <div class="flex flex-col min-w-0">
+          <div class="flex items-center gap-1.5">
+            <span class="font-bold text-slate-900 tracking-tight text-base leading-none">CAIDVA</span>
+            <span class="text-[10px] bg-blue-100 text-blue-700 font-semibold px-1.5 py-0.2 rounded leading-tight">ANZ</span>
+          </div>
+          <span class="text-[11px] text-slate-500 font-medium tracking-tight mt-0.5 truncate">CAIDV Anzoátegui</span>
+        </div>
+      </div>
+      <!-- Close mobile btn -->
+      <button aria-label="Cerrar menú móvil" class="md:hidden text-slate-500 hover:text-slate-800 p-1.5 rounded-lg hover:bg-slate-100" onclick="toggleSidebarMobile()" type="button">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
     </div>
-</div>
-{% endblock %}
+
+    <!-- Navigation List -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-1.5">
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-blue-50 text-blue-700 font-semibold text-sm transition-all" href="#">
+        <span class="material-symbols-outlined text-[22px] text-blue-600">space_dashboard</span>
+        <span class="truncate">Panel Principal</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">accessibility_new</span>
+        <span class="truncate">Pacientes y Alumnos</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">assignment_turned_in</span>
+        <span class="truncate">Pre-Registros</span>
+        <span class="ml-auto bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded-full font-bold">8</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">medical_information</span>
+        <span class="truncate">Fichas Médicas</span>
+        <span class="ml-auto bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded-full font-bold">142</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">calendar_month</span>
+        <span class="truncate">Agenda y Citas</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">analytics</span>
+        <span class="truncate">Reportes y Métricas</span>
+      </a>
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">settings</span>
+        <span class="truncate">Configuración</span>
+      </a>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="p-4 border-t border-slate-200 bg-slate-50/80 shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-slate-900 text-white text-xs font-semibold flex items-center justify-center shrink-0 shadow-sm">
+          MR
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="font-bold text-slate-900 text-xs truncate">Dra. M. Ramos</p>
+          <p class="text-slate-500 text-[11px] truncate">Administradora General</p>
+        </div>
+        <button class="text-slate-400 hover:text-rose-600 p-1 rounded-md hover:bg-white transition-colors" title="Cerrar sesión" type="button">
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <div class="flex-1 flex flex-col min-w-0 w-full min-h-screen">
+    
+    <!-- Sticky Top Header -->
+    <header class="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-xs">
+      <div class="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+        
+        <!-- Left: Toggle & Breadcrumb -->
+        <div class="flex items-center gap-3 min-w-0">
+          <button aria-label="Abrir menú de navegación" class="text-slate-600 hover:text-slate-900 p-2 rounded-xl hover:bg-slate-100 border border-slate-200 transition-colors flex items-center justify-center md:hidden" id="sidebar-toggle-btn" onclick="toggleSidebarMobile()" type="button">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+          </button>
+          <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium truncate">
+            <span class="text-slate-900 font-bold tracking-tight truncate">CAIDVA</span>
+            <span class="text-slate-300">/</span>
+            <span class="text-slate-600 truncate">Panel Administrativo</span>
+          </div>
+          <div class="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200/70">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Período Lectivo 2024-2025 - Activo
+          </div>
+        </div>
+
+        <!-- Middle: Global Search -->
+        <div class="flex-1 max-w-md hidden sm:block">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-slate-400 pointer-events-none">search</span>
+            <input class="w-full pl-9 pr-4 py-2 bg-slate-100/90 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all" id="global-search" onkeyup="liveSearchTable(this.value)" placeholder="Buscar por cédula, nombre o diagnóstico..." type="text">
+          </div>
+        </div>
+
+        <!-- Right: Actions & User Avatar -->
+        <div class="flex items-center gap-2.5 shrink-0">
+          <a class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm shadow-sm transition-all focus:ring-2 focus:ring-blue-500 focus:ring-offset-1" href="{{ url_for('generar_pdf') }}">
+            <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+            <span class="hidden sm:inline">Descargar Reporte PDF</span>
+            <span class="sm:hidden">PDF</span>
+          </a>
+          <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center shadow-xs">
+            MR
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Search Sub-bar -->
+      <div class="sm:hidden px-4 pb-3">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-slate-400 pointer-events-none">search</span>
+          <input class="w-full pl-9 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white" onkeyup="liveSearchTable(this.value)" placeholder="Buscar por cédula o nombre..." type="text">
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full">
+      
+      <!-- Welcome Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-xs">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+              Panel de Control Administrativo - CAIDVA
+            </h1>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            Centro de Atención Integral de Deficiencias Visuales de Anzoátegui • Censo oficial y fichas especializadas.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg shrink-0 self-start md:self-auto">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Sistema Centralizado • En Línea</span>
+        </div>
+      </div>
+
+      <!-- Metric KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Metric 1: Total Matriculados -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Matriculados</span>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">groups</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-3xl font-extrabold text-slate-900">142</div>
+            <div class="flex items-center gap-1.5 mt-1 text-xs font-semibold text-emerald-600">
+              <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+              <span>+12 este mes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 2: Nuevas Preinscripciones -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Nuevas Preinscripciones</span>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">pending_actions</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-3xl font-extrabold text-slate-900">8</div>
+            <div class="flex items-center gap-1.5 mt-1 text-xs font-medium text-amber-700">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              <span>En revisión médica</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric 3: Fichas Médicas -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Fichas Médicas</span>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-[22px]">verified</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-3xl font-extrabold text-slate-900">98%</div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
+              <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 98%"></div>
+            </div>
+            <div class="flex items-center gap-1 mt-1.5 text-xs font-semibold text-emerald-700">
+              <span class="material-symbols-outlined text-[14px]">check_circle</span>
+              <span>Auditado y verificado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students Table Section -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+        
+        <!-- Section Filter Header -->
+        <div class="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <h2 class="text-lg font-bold text-slate-900">Lista de Estudiantes Registrados</h2>
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100" id="record-count">
+                5 Estudiantes
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Expedientes oficiales activos con seguimiento pedagógico y oftalmológico</p>
+          </div>
+          
+          <!-- Quick Category Filters -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-xs text-slate-400 font-medium mr-1 shrink-0">Filtrar:</span>
+            <button class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-blue-600 text-white" onclick="applyCategoryFilter('all', this)" type="button">
+              Todos
+            </button>
+            <button class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" onclick="applyCategoryFilter('Ceguera Total', this)" type="button">
+              Ceguera Total
+            </button>
+            <button class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" onclick="applyCategoryFilter('Baja Visión', this)" type="button">
+              Baja Visión
+            </button>
+            <button class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" onclick="applyCategoryFilter('Braille', this)" type="button">
+              Braille
+            </button>
+            <button class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-slate-100 text-slate-700 hover:bg-slate-200" onclick="applyCategoryFilter('Tiflotecnología', this)" type="button">
+              Tiflotecnología
+            </button>
+          </div>
+        </div>
+
+        <!-- Responsive Table Container -->
+        <div class="overflow-x-auto w-full">
+          <table class="min-w-full w-full text-left text-sm text-slate-700 divide-y divide-slate-200 whitespace-nowrap">
+            <thead class="bg-slate-50 text-xs uppercase font-semibold text-slate-500 tracking-wider">
+              <tr>
+                <th class="py-3.5 px-5 text-left font-semibold text-slate-600 tracking-wider" scope="col">Nombres</th>
+                <th class="py-3.5 px-4 text-left font-semibold text-slate-600 tracking-wider" scope="col">Apellidos</th>
+                <th class="py-3.5 px-4 text-center" scope="col">Cédula de Identidad</th>
+                <th class="py-3.5 px-4 text-center" scope="col">Edad / Nacimiento</th>
+                <th class="py-3.5 px-4 text-center" scope="col">Teléfono de Contacto</th>
+                <th class="py-3.5 px-4 text-center" scope="col">Estado Expediente</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 bg-white" id="alumnos-table-body">
+              
+              <!-- Student 1: Elena Rodríguez -->
+              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Ceguera Total" data-search="elena rodríguez pérez v-29.450.812 ceguera total adquirida orientacion movilidad 0416-5542190">
+                <td class="py-4 px-5 whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Elena María</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Rodríguez Pérez</span></td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-29.450.812</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">18 años</span>
+                  <span class="text-[11px] text-slate-400">14/06/2006</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0416-5542190">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
+                    0416-5542190
+                  </a>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <div class="inline-flex items-center justify-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
+                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
+                      Ver Ficha
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
+                      <span class="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Student 2: Carlos Mendoza -->
+              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Braille" data-search="carlos mendoza soto v-19.821.405 retinopatia prematuro braille integral 0414-8291048">
+                <td class="py-4 px-5 whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Carlos Alberto</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Mendoza Soto</span></td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-19.821.405</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">27 años</span>
+                  <span class="text-[11px] text-slate-400">12/03/1997</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0414-8291048">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
+                    0414-8291048
+                  </a>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <div class="inline-flex items-center justify-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
+                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
+                      Ver Ficha
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
+                      <span class="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Student 3: Sofía Valera -->
+              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Baja Visión" data-search="sofía valera navarro v-27.189.332 stargardt baja vision severa macrolectura 0412-9983144">
+                <td class="py-4 px-5 whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Sofía Alejandra</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Valera Navarro</span></td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-27.189.332</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">22 años</span>
+                  <span class="text-[11px] text-slate-400">03/02/2002</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0412-9983144">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
+                    0412-9983144
+                  </a>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <div class="inline-flex items-center justify-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
+                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
+                      Ver Ficha
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
+                      <span class="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Student 4: Juan Gómez -->
+              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Tiflotecnología" data-search="juan gómez quintero v-24.819.304 glaucoma congenito tiflotecnologia lectores pantalla 0424-8193021">
+                <td class="py-4 px-5 whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Juan Manuel</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Gómez Quintero</span></td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-24.819.304</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">24 años</span>
+                  <span class="text-[11px] text-slate-400">22/09/2000</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0424-8193021">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
+                    0424-8193021
+                  </a>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <div class="inline-flex items-center justify-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
+                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
+                      Ver Ficha
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
+                      <span class="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Student 5: Diego Morales -->
+              <tr class="student-row hover:bg-slate-50/80 transition-colors" data-category="Braille" data-search="diego morales rivas v-26.331.415 atrofia optica bilateral estimulacion visual braille 0424-7712390">
+                <td class="py-4 px-5 whitespace-nowrap">
+                  <div class="flex items-center gap-3">
+                    <span class="font-bold text-slate-900 block text-xs sm:text-sm">Diego Andrés</span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-left"><span class="font-medium text-slate-800 text-xs sm:text-sm block">Morales Rivas</span></td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-mono font-bold text-slate-800 text-xs sm:text-sm bg-slate-100 px-2 py-1 rounded">V-26.331.415</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <span class="font-semibold text-slate-800 text-xs sm:text-sm block">23 años</span>
+                  <span class="text-[11px] text-slate-400">18/07/2001</span>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <a class="inline-flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium text-xs transition-colors" href="tel:0424-7712390">
+                    <span class="material-symbols-outlined text-[16px] text-slate-400">call</span>
+                    0424-7712390
+                  </a>
+                </td>
+                <td class="py-4 px-4 whitespace-nowrap text-center">
+                  <div class="inline-flex items-center justify-center gap-1.5">
+                    <button class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors inline-flex items-center gap-1 border border-slate-200" title="Ver Ficha y Diagnóstico" type="button">
+                      <span class="material-symbols-outlined text-[16px]">folder_shared</span>
+                      Ver Ficha
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Editar Registro" type="button">
+                      <span class="material-symbols-outlined text-[18px]">edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty Results Message -->
+        <div class="hidden py-12 px-4 text-center" id="no-results">
+          <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 mx-auto flex items-center justify-center mb-3">
+            <span class="material-symbols-outlined text-[28px]">search_off</span>
+          </div>
+          <p class="text-sm font-semibold text-slate-800">No se encontraron expedientes coincidentes</p>
+          <p class="text-xs text-slate-500 mt-1">Pruebe ajustando los términos de búsqueda o los filtros seleccionados</p>
+          <button class="mt-4 px-3.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold shadow-xs hover:bg-blue-700 transition-colors" onclick="resetFilters()" type="button">
+            Restablecer búsqueda
+          </button>
+        </div>
+
+        <!-- Table Footer Pagination Bar -->
+        <div class="p-4 bg-slate-50/90 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-slate-400">database</span>
+            <span>Matrícula oficial verificada bajo el código institucional CAIDVA-ANZ</span>
+          </div>
+          <div class="flex items-center gap-2 font-medium">
+            <span>Página 1 de 1</span>
+            <div class="flex items-center gap-1 ml-2">
+              <button class="p-1 rounded bg-white border border-slate-200 text-slate-300 cursor-not-allowed" disabled="" type="button">
+                <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+              </button>
+              <button class="p-1 rounded bg-white border border-slate-200 text-slate-300 cursor-not-allowed" disabled="" type="button">
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Institutional Footer -->
+    <footer class="mt-auto border-t border-slate-200 bg-white py-4 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <div class="flex items-center gap-2 text-center md:text-left">
+          <span class="material-symbols-outlined text-[18px] text-blue-600 shrink-0">security</span>
+          <p>
+            <strong class="font-semibold text-slate-700">Protocolo de Confidencialidad:</strong> Los datos médicos y diagnósticos están protegidos conforme a la Ley Orgánica de Salud y lineamientos del CAIDV Anzoátegui.
+          </p>
+        </div>
+        <div class="text-slate-400 shrink-0">
+          © 2025 CAIDVA Anzoátegui. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    let currentCategory = 'all';
+    let currentSearchTerm = '';
+
+    function toggleSidebarMobile() {
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('mobile-backdrop');
+      if (!sidebar) return;
+
+      const isClosed = sidebar.classList.contains('-translate-x-full');
+      if (isClosed) {
+        sidebar.classList.remove('-translate-x-full');
+        if (backdrop) backdrop.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        if (backdrop) backdrop.classList.add('hidden');
+      }
+    }
+
+    function applyCategoryFilter(cat, btnElement) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      btnElement.classList.remove('bg-slate-100', 'text-slate-700');
+      btnElement.classList.add('bg-blue-600', 'text-white');
+      filterRows();
+    }
+
+    function liveSearchTable(val) {
+      currentSearchTerm = val.toLowerCase().trim();
+      filterRows();
+    }
+
+    function filterRows() {
+      const rows = document.querySelectorAll('.student-row');
+      const emptyBox = document.getElementById('no-results');
+      const counter = document.getElementById('record-count');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const rowCategory = row.getAttribute('data-category') || '';
+        const rowData = (row.getAttribute('data-search') + ' ' + row.innerText).toLowerCase();
+
+        const matchCat = (currentCategory === 'all') || (rowCategory.toLowerCase().includes(currentCategory.toLowerCase()));
+        const matchSearch = (currentSearchTerm === '') || rowData.includes(currentSearchTerm);
+
+        if (matchCat && matchSearch) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (counter) {
+        counter.textContent = `${visibleCount} Estudiante${visibleCount !== 1 ? 's' : ''}`;
+      }
+
+      if (emptyBox) {
+        if (visibleCount === 0) {
+          emptyBox.classList.remove('hidden');
+        } else {
+          emptyBox.classList.add('hidden');
+        }
+      }
+    }
+
+    function resetFilters() {
+      currentSearchTerm = '';
+      currentCategory = 'all';
+      const searchInputs = document.querySelectorAll('input[type="text"]');
+      searchInputs.forEach(i => i.value = '');
+      const allBtn = document.querySelector('.filter-pill');
+      if (allBtn) applyCategoryFilter('all', allBtn);
+      filterRows();
+    }
+  </script>
+
+</body>
+</html>

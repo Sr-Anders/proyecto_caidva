@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-50">
-<head>
+<!DOCTYPE html><html lang="es" class="h-full bg-slate-50"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Módulo de Inscripción de Estudiantes - CAIDVA</title>
+  <title>Módulo de Preinscripcion en Linea - CAIDVA</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <script>
     tailwind.config = {
       theme: {
@@ -44,13 +42,11 @@
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="#" class="p-2 -ml-2 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-colors inline-flex items-center justify-center" aria-label="Volver">
+        <a href="{{ url_for('index') }}" class="p-2 -ml-2 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-colors inline-flex items-center justify-center" aria-label="Volver">
           <span class="material-symbols-outlined text-[22px]">arrow_back</span>
         </a>
         <div class="flex items-center space-x-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
-            C
-          </div>
+          <div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-lg tracking-tighter flex-shrink-0 shadow-sm" aria-hidden="true">C</div>
           <div>
             <h1 class="text-sm font-semibold text-slate-900 leading-tight">CAIDVA</h1>
             <p class="text-xs text-slate-500 hidden sm:block">Centro de Atención Integral de Deficiencias Visuales</p>
@@ -70,8 +66,8 @@
   <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
     
     <!-- Title & Context Card -->
-    <div class="mb-6">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Módulo de Inscripción de Estudiantes</h2>
+    <div class="mb-6 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Módulo de Preinscripción&nbsp;<span style="font-size: 1.5rem; letter-spacing: -0.025em;">en Linea</span></h2>
       <p class="mt-1.5 text-sm sm:text-base text-slate-600">
         Complete los datos requeridos para formalizar el registro escolar y crear su cuenta en la plataforma del CAIDVA.
       </p>
@@ -81,159 +77,100 @@
     <form method="POST" enctype="multipart/form-data" class="space-y-6" id="inscripcionForm">
       
       <!-- Bloque 1: Cuenta y Acceso a la Plataforma -->
-      <section class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-7">
-        <div class="flex items-center space-x-3 mb-5 pb-3 border-b border-slate-100">
-          <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">badge</span>
-          </div>
-          <div>
-            <h3 class="text-base font-semibold text-slate-900">Credenciales de Acceso</h3>
-            <p class="text-xs text-slate-500">Datos con los que el estudiante o representante gestionará su expediente</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Correo Electrónico -->
-          <div>
-            <label for="correo" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Correo Electrónico <span class="text-rose-500">*</span>
-            </label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <span class="material-symbols-outlined text-[19px]">mail</span>
-              </span>
-              <input 
-                type="email" 
-                class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" 
-                id="correo" 
-                name="correo" 
-                placeholder="ejemplo@correo.com" 
-                required
-              >
-            </div>
-            <p class="mt-1.5 text-xs text-slate-500 flex items-center gap-1">
-              <span class="material-symbols-outlined text-[14px] text-slate-400">info</span>
-              Este correo lo usará para iniciar sesión en la plataforma.
-            </p>
-          </div>
-
-          <!-- Contraseña -->
-          <div>
-            <label for="password" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Contraseña <span class="text-rose-500">*</span>
-            </label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <span class="material-symbols-outlined text-[19px]">lock</span>
-              </span>
-              <input 
-                type="password" 
-                class="w-full pl-10 pr-10 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" 
-                id="password" 
-                name="password" 
-                placeholder="Cree una contraseña segura" 
-                required
-              >
-              <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
-                <span class="material-symbols-outlined text-[19px]" id="passwordToggleIcon">visibility</span>
-              </button>
-            </div>
-            <p class="mt-1.5 text-xs text-slate-500 flex items-center gap-1">
-              <span class="material-symbols-outlined text-[14px] text-slate-400">info</span>
-              Defina la contraseña con la que ingresará a su cuenta.
-            </p>
-          </div>
-        </div>
-      </section>
+      
 
       <!-- Bloque 2: Información Personal del Estudiante -->
       <section class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-7">
-        <div class="flex items-center space-x-3 mb-5 pb-3 border-b border-slate-100">
-          <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">person</span>
-          </div>
-          <div>
-            <h3 class="text-base font-semibold text-slate-900">Datos Personales del Estudiante</h3>
-            <p class="text-xs text-slate-500">Identificación oficial y medios de contacto del alumno</p>
-          </div>
-        </div>
+        <div class="flex flex-col items-center text-center space-y-2 mb-5 pb-3 border-b border-slate-100"><div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">person</span></div><div><h3 class="text-base font-semibold text-slate-900">Datos Personales del Estudiante</h3><p class="text-xs text-slate-500">Identificación oficial y medios de contacto del alumno</p></div></div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Cédula del Alumno -->
-          <div>
-            <label for="ced_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Cédula del Alumno <span class="text-rose-500">*</span>
-            </label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <span class="material-symbols-outlined text-[19px]">id_card</span>
-              </span>
-              <input 
-                type="text" 
-                class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" 
-                id="ced_alum" 
-                name="ced_alum" 
-                placeholder="Ej: V-25123456" 
-                required
-              >
-            </div>
-            <p class="mt-1.5 text-xs text-slate-500">Ingrese el número de cédula de identidad o escolar del estudiante.</p>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5"><!-- Nombres -->
+<div class="">
+  <label for="nombres_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Nombres <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">badge</span>
+    </span>
+    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" id="nombres_alum" name="nombres_alum" placeholder="Ej: Juan Carlos" required="">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Ingrese los nombres completos del estudiante.</p>
+</div>
 
-          <!-- Fecha de Nacimiento -->
-          <div>
-            <label for="fec_nac" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Fecha de Nacimiento <span class="text-rose-500">*</span>
-            </label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <span class="material-symbols-outlined text-[19px]">calendar_today</span>
-              </span>
-              <input 
-                type="date" 
-                class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all" 
-                id="fec_nac" 
-                name="fec_nac" 
-                required
-              >
-            </div>
-            <p class="mt-1.5 text-xs text-slate-500">Seleccione el día, mes y año de nacimiento del estudiante.</p>
-          </div>
+<!-- Apellidos -->
+<div class="">
+  <label for="apellidos_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Apellidos <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">badge</span>
+    </span>
+    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" id="apellidos_alum" name="apellidos_alum" placeholder="Ej: Pérez Gómez" required="">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Ingrese los apellidos completos del estudiante.</p>
+</div>
 
-          <!-- Teléfono de Contacto -->
-          <div class="md:col-span-2">
-            <label for="tel_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Teléfono de Contacto <span class="text-rose-500">*</span>
-            </label>
-            <div class="relative">
-              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <span class="material-symbols-outlined text-[19px]">call</span>
-              </span>
-              <input 
-                type="tel" 
-                class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" 
-                id="tel_alum" 
-                name="tel_alum" 
-                placeholder="Ej: 0414-1234567" 
-                required
-              >
-            </div>
-            <p class="mt-1.5 text-xs text-slate-500">Ingrese un número telefónico activo de contacto.</p>
-          </div>
-        </div>
+<!-- Cédula del Alumno -->
+<div class="">
+  <label for="ced_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Cédula del Alumno <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">id_card</span>
+    </span>
+    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" id="ced_alum" name="ced_alum" placeholder="Ej: V-25123456" required="" value="V-25123456">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Ingrese el número de cédula de identidad o escolar del estudiante.</p>
+</div>
+
+<!-- Fecha de Nacimiento -->
+<div class="">
+  <label for="fec_nac" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Fecha de Nacimiento <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">calendar_today</span>
+    </span>
+    <input type="date" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all" id="fec_nac" name="fec_nac" required="">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Seleccione el día, mes y año de nacimiento del estudiante.</p>
+</div>
+
+<!-- Teléfono de Contacto -->
+<div class="">
+  <label for="tel_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Teléfono de Contacto <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">call</span>
+    </span>
+    <input type="tel" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" id="tel_alum" name="tel_alum" placeholder="Ej: 0414-1234567" required="">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Ingrese un número telefónico activo de contacto.</p>
+</div>
+
+<!-- Dirección de Habitación -->
+<div class="">
+  <label for="dir_alum" class="block text-sm font-semibold text-slate-700 mb-1.5">
+    Dirección de Habitación <span class="text-rose-500">*</span>
+  </label>
+  <div class="relative">
+    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+      <span class="material-symbols-outlined text-[19px]">location_on</span>
+    </span>
+    <input type="text" class="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all placeholder:text-slate-400" id="dir_alum" name="dir_alum" placeholder="Ej: Calle Principal, Sector Las Palmeras, Barcelona" required="">
+  </div>
+  <p class="mt-1.5 text-xs text-slate-500">Ingrese la dirección de residencia actual del estudiante.</p>
+</div></div>
       </section>
 
       <!-- Bloque 3: Modalidad Educativa y Línea de Atención -->
       <section class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-7">
-        <div class="flex items-center space-x-3 mb-5 pb-3 border-b border-slate-100">
-          <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">school</span>
-          </div>
-          <div>
-            <h3 class="text-base font-semibold text-slate-900">Modalidad de Atención</h3>
-            <p class="text-xs text-slate-500">Definición del tipo de integración pedagógica requerida</p>
-          </div>
-        </div>
+        <div class="flex flex-col items-center text-center space-y-2 mb-5 pb-3 border-b border-slate-100"><div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">school</span></div><div><h3 class="text-base font-semibold text-slate-900">Modalidad de Atención</h3><p class="text-xs text-slate-500">Definición del tipo de integración pedagógica requerida</p></div></div>
 
         <div>
           <!-- Selector de Línea de Atención -->
@@ -244,14 +181,8 @@
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <span class="material-symbols-outlined text-[19px]">hub</span>
             </span>
-            <select 
-              class="w-full pl-10 pr-10 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all appearance-none cursor-pointer" 
-              id="linea_atencion" 
-              name="linea_atencion" 
-              onchange="toggleInstituto()" 
-              required
-            >
-              <option value="" selected disabled>Seleccione la modalidad de atención...</option>
+            <select class="w-full pl-10 pr-10 py-2.5 bg-slate-50/70 border border-slate-300 rounded-xl text-slate-900 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 transition-all appearance-none cursor-pointer" id="linea_atencion" name="linea_atencion" onchange="toggleInstituto()" required="">
+              <option value="" selected="" disabled="">Seleccione la modalidad de atención...</option>
               <option value="Atención Directa">Atención Directa (Sede CAIDVA)</option>
               <option value="Integración Escolar">Integración Escolar</option>
             </select>
@@ -273,49 +204,25 @@
             <!-- Nombre del Instituto -->
             <div>
               <label for="nom_ins" class="block text-xs font-semibold text-slate-700 mb-1">Nombre del Instituto</label>
-              <input 
-                type="text" 
-                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" 
-                id="nom_ins" 
-                name="nom_ins" 
-                placeholder="Ej: U.E. Nacional Boyacá"
-              >
+              <input type="text" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" id="nom_ins" name="nom_ins" placeholder="Ej: U.E. Nacional Boyacá">
             </div>
 
             <!-- Código del Instituto -->
             <div>
-              <label for="cod_ins" class="block text-xs font-semibold text-slate-700 mb-1">Código del Instituto</label>
-              <input 
-                type="text" 
-                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" 
-                id="cod_ins" 
-                name="cod_ins" 
-                placeholder="Ej: COD-12345"
-              >
+              <label for="cod_ins_edu" class="block text-xs font-semibold text-slate-700 mb-1">Código del Instituto</label>
+              <input type="text" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" id="cod_ins_edu" name="cod_ins_edu" placeholder="Ej: COD-12345">
             </div>
 
             <!-- RIF del Instituto -->
             <div>
               <label for="rif_ins" class="block text-xs font-semibold text-slate-700 mb-1">RIF del Instituto</label>
-              <input 
-                type="text" 
-                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" 
-                id="rif_ins" 
-                name="rif_ins" 
-                placeholder="Ej: J-12345678-9"
-              >
+              <input type="text" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" id="rif_ins" name="rif_ins" placeholder="Ej: J-12345678-9">
             </div>
 
             <!-- Grado, Año o Semestre -->
             <div>
               <label for="grado_escolar" class="block text-xs font-semibold text-slate-700 mb-1">Grado, Año o Semestre</label>
-              <input 
-                type="text" 
-                class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" 
-                id="grado_escolar" 
-                name="grado_escolar" 
-                placeholder="Ej: 3er Grado / 2do Año / 1er Semestre"
-              >
+              <input type="text" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/30 focus:border-blue-600 placeholder:text-slate-400" id="grado_escolar" name="grado_escolar" placeholder="Ej: 3er Grado / 2do Año / 1er Semestre">
             </div>
           </div>
         </div>
@@ -323,15 +230,7 @@
 
       <!-- Bloque 4: Carga Documental Médica -->
       <section class="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-5 sm:p-7">
-        <div class="flex items-center space-x-3 mb-5 pb-3 border-b border-slate-100">
-          <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">medical_services</span>
-          </div>
-          <div>
-            <h3 class="text-base font-semibold text-slate-900">Documentación Médica y Visual</h3>
-            <p class="text-xs text-slate-500">Certificación facultativa requerida para la valoración en el centro</p>
-          </div>
-        </div>
+        <div class="flex flex-col items-center text-center space-y-2 mb-5 pb-3 border-b border-slate-100"><div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">medical_services</span></div><div><h3 class="text-base font-semibold text-slate-900">Documentación Médica y Visual</h3><p class="text-xs text-slate-500">Certificación facultativa requerida para la valoración en el centro</p></div></div>
 
         <div>
           <label for="informe_medico" class="block text-sm font-semibold text-slate-700 mb-1.5">
@@ -340,15 +239,7 @@
           
           <!-- Dropzone estilo PWA que envuelve el input file real -->
           <div class="relative mt-2 border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-2xl p-6 text-center transition-colors bg-slate-50/50 hover:bg-blue-50/20 group cursor-pointer" onclick="document.getElementById('informe_medico').click()">
-            <input 
-              type="file" 
-              class="sr-only" 
-              id="informe_medico" 
-              name="informe_medico" 
-              accept=".pdf,image/*" 
-              required
-              onchange="actualizarNombreArchivo(this)"
-            >
+            <input type="file" class="sr-only" id="informe_medico" name="informe_medico" accept=".pdf,image/*" required="" onchange="actualizarNombreArchivo(this)">
             <div class="mx-auto w-12 h-12 rounded-full bg-blue-100/70 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
               <span class="material-symbols-outlined text-[24px]">upload_file</span>
             </div>
@@ -358,7 +249,7 @@
             <p class="text-xs text-slate-400 mt-1">Formatos admitidos: PDF, JPG, PNG (Máx 5MB)</p>
             <div id="file_selected_indicator" class="mt-3 hidden inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
               <span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
-              <span id="selected_file_name">archivo.pdf</span>
+              <span id="selected_file_name" class="">archivo.pdf</span>
             </div>
           </div>
           
@@ -371,12 +262,9 @@
 
       <!-- Botón de Envío y Acciones -->
       <div class="pt-2">
-        <button 
-          type="submit" 
-          class="w-full py-4 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99] touch-manipulation cursor-pointer"
-        >
+        <button type="submit" class="w-full py-4 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold text-base shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 active:scale-[0.99] touch-manipulation cursor-pointer">
           <span class="material-symbols-outlined text-[22px]">how_to_reg</span>
-          <span>Registrar Estudiante y Crear Cuenta</span>
+          <span class="">Registrar Preinscripcion</span>
         </button>
         <p class="text-center text-xs text-slate-400 mt-3">
           Al completar este registro, confirma que los datos y documentos suministrados son fidedignos.
@@ -389,7 +277,7 @@
   <!-- PWA Bottom Floating Bar / Footer -->
   <footer class="bg-white border-t border-slate-200/80 py-4 px-4 text-center text-xs text-slate-500 mt-10">
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <span>CAIDVA &copy; 2025 - Sistema Gestor de Preinscripciones</span>
+      <span class="">CAIDVA © 2025 - Sistema Gestor de Preinscripciones</span>
       <div class="flex items-center space-x-4">
         <a href="#" class="hover:underline">Ayuda</a>
         <a href="#" class="hover:underline">Privacidad</a>
@@ -445,5 +333,16 @@
       }
     }
   </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
