@@ -118,12 +118,15 @@ def dashboard():
     if 'rol' in session and session['rol'] == 'administrador':
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
-        
+
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno")
+        resultado = cursor.fetchone()
+        total_matriculados = resultado['total'] if resultado else 0
         cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno")
         alumnos = cursor.fetchall()
         cursor.close()
         conn.close()
-        return render_template('dashboard.html', alumnos=alumnos)
+        return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados)
     return redirect(url_for('login'))
 
 @app.route('/generar_pdf')
