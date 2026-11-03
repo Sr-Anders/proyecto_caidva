@@ -119,12 +119,12 @@ def dashboard():
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT COUNT(*) AS total FROM alumno")
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno WHERE EstadoAlum = 'Aprobado'")
         resultado = cursor.fetchone()
 
         total_matriculados = resultado['total'] if resultado else 0
 
-        cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno")
+        cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno WHERE EstadoAlum = 'Aprobado'")
         alumnos = cursor.fetchall()
 
         cursor.execute("SELECT COUNT(*) AS total_p FROM alumno WHERE EstadoAlum = 'Pendiente'")
@@ -152,7 +152,7 @@ def pre_registros():
         cursor.execute("SELECT * FROM alumno WHERE EstadoAlum = 'Pendiente'")
         alumnos_pendientes = cursor.fetchall()
 
-        cursor.execute("SELECT COUNT(*) AS total FROM alumno")
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno WHERE EstadoAlum = 'Aprobado'")
         resultado = cursor.fetchone()
 
         total_matriculados = resultado['total'] if resultado else 0
