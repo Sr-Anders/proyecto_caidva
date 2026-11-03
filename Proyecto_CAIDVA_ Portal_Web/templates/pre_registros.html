@@ -226,7 +226,7 @@
             </div>
           </div>
           <div class="mt-4">
-            <div class="text-3xl font-extrabold text-slate-900">8</div>
+            <div class="text-3xl font-extrabold text-slate-900">{{ total_pendientes }}</div>
             <div class="flex items-center gap-1.5 mt-1 text-xs font-medium text-amber-700">
               <span class="material-symbols-outlined text-[16px]">schedule</span>
               <span>En revisión médica</span>
@@ -264,7 +264,7 @@
             <div class="flex items-center gap-2.5">
               <h2 class="text-lg font-bold text-slate-900">Lista de Estudiantes Pre-Registrados</h2>
               <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100" id="record-count">
-                5 Estudiantes
+                {{ total_pendientes }} Estudiantes
               </span>
             </div>
             <p class="text-xs text-slate-500 mt-1">Expedientes oficiales activos con seguimiento pedagógico y oftalmológico</p>

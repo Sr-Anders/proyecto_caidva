@@ -121,12 +121,21 @@ def dashboard():
 
         cursor.execute("SELECT COUNT(*) AS total FROM alumno")
         resultado = cursor.fetchone()
+
         total_matriculados = resultado['total'] if resultado else 0
+
         cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno")
         alumnos = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(*) AS total_p FROM alumno WHERE EstadoAlum = 'Pendiente'")
+        res_pendientes = cursor.fetchone()
+        total_pendientes = res_pendientes['total_p'] if res_pendientes else 0
+
         cursor.close()
         conn.close()
-        return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados)
+
+        return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados, total_pendientes=total_pendientes)
+    
     return redirect(url_for('login'))
 
 @app.route('/pre_registros')
@@ -136,13 +145,22 @@ def pre_registros():
         conn = get_db()
         cursor = conn.cursor(dictionary=True)
 
+        cursor.execute("SELECT COUNT(*) AS total_p FROM alumno WHERE EstadoAlum = 'Pendiente'")
+        conteo = cursor.fetchone()
+        total_pendientes = conteo['total_p'] if conteo else 0
+
         cursor.execute("SELECT * FROM alumno WHERE EstadoAlum = 'Pendiente'")
         alumnos_pendientes = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno")
+        resultado = cursor.fetchone()
+
+        total_matriculados = resultado['total'] if resultado else 0
 
         cursor.close()
         conn.close()
         
-        return render_template('pre_registros.html', alumnos=alumnos_pendientes)
+        return render_template('pre_registros.html', alumnos=alumnos_pendientes, total_pendientes=total_pendientes, total_matriculados=total_matriculados)
     
     return redirect(url_for('login'))
 
