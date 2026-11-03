@@ -129,6 +129,47 @@ def dashboard():
         return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados)
     return redirect(url_for('login'))
 
+@app.route('/pre_registros')
+def pre_registros():
+
+    if 'rol' in session and session['rol'] == 'administrador':
+        conn = get_db()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM alumno WHERE EstadoAlum = 'Pendiente'")
+        alumnos_pendientes = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+        
+        return render_template('pre_registros.html', alumnos=alumnos_pendientes)
+    
+    return redirect(url_for('login'))
+
+@app.route('/preinscripcion/aprobar/<cedula>', methods=['POST'])
+def aprobar_preinscripcion(cedula):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE alumno SET EstadoAlum = 'Aprobado' WHERE CedAlum = %s", (cedula,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    flash(f'Pre-inscripción del estudiante con cédula {cedula} aprobada.', 'success')
+    return redirect(url_for('pre_registros'))
+
+@app.route('/preinscripcion/denegar/<cedula>', methods=['POST'])
+def denegar_preinscripcion(cedula):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE alumno SET EstadoAlum = 'Denegado' WHERE CedAlum = %s", (cedula,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    flash(f'Pre-inscripción del estudiante con cédula {cedula} denegada.', 'warning')
+    return redirect(url_for('pre_registros'))
+
 @app.route('/generar_pdf')
 def generar_pdf():
     if 'rol' in session and session['rol'] == 'administrador':
