@@ -124,6 +124,10 @@ def dashboard():
 
         total_matriculados = resultado['total'] if resultado else 0
 
+        cursor.execute("SELECT COUNT(*) AS total_rev FROM alumno WHERE EstadoAlum = 'En revisión'")
+        res_revision = cursor.fetchone()
+        total_revision = res_revision['total_rev'] if res_revision else 0
+
         cursor.execute("SELECT NomAlum, ApeAlum, CedAlum, FecNacAlum, NumTelAlum FROM alumno WHERE EstadoAlum = 'Aprobado'")
         alumnos = cursor.fetchall()
 
@@ -131,10 +135,14 @@ def dashboard():
         res_pendientes = cursor.fetchone()
         total_pendientes = res_pendientes['total_p'] if res_pendientes else 0
 
+        cursor.execute("SELECT COUNT(*) AS total_den FROM alumno WHERE EstadoAlum = 'Denegado'")
+        res_denegados = cursor.fetchone()
+        total_denegados = res_denegados['total_den'] if res_denegados else 0
+
         cursor.close()
         conn.close()
 
-        return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados, total_pendientes=total_pendientes)
+        return render_template('dashboard.html', alumnos=alumnos, total_matriculados=total_matriculados, total_pendientes=total_pendientes, total_revision=total_revision, total_denegados=total_denegados)
     
     return redirect(url_for('login'))
 
@@ -157,11 +165,20 @@ def pre_registros():
 
         total_matriculados = resultado['total'] if resultado else 0
 
+        cursor.execute("SELECT COUNT(*) AS total_rev FROM alumno WHERE EstadoAlum = 'En revisión'")
+        res_revision = cursor.fetchone()
+        total_revision = res_revision['total_rev'] if res_revision else 0
+
+        
+        cursor.execute("SELECT COUNT(*) AS total_den FROM alumno WHERE EstadoAlum = 'Denegado'")
+        res_denegados = cursor.fetchone()
+        total_denegados = res_denegados['total_den'] if res_denegados else 0
+
         cursor.close()
         conn.close()
-        
-        return render_template('pre_registros.html', alumnos=alumnos_pendientes, total_pendientes=total_pendientes, total_matriculados=total_matriculados)
-    
+
+        return render_template('pre_registros.html', alumnos=alumnos_pendientes, total_pendientes=total_pendientes, total_matriculados=total_matriculados, total_revision=total_revision, total_denegados=total_denegados)
+
     return redirect(url_for('login'))
 
 @app.route('/preinscripcion/aprobar/<cedula>', methods=['POST'])
@@ -187,6 +204,80 @@ def denegar_preinscripcion(cedula):
     conn.close()
     flash(f'Pre-inscripción del estudiante con cédula {cedula} denegada.', 'warning')
     return redirect(url_for('pre_registros'))
+
+@app.route('/preinscripcion/en_revision/<cedula>', methods=['POST'])
+def en_revision_preinscripcion(cedula):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE alumno SET EstadoAlum = 'En Revisión' WHERE CedAlum = %s", (cedula,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    flash(f'Pre-inscripción del estudiante con cédula {cedula} en revisión.', 'info')
+    return redirect(url_for('pre_registros'))
+
+@app.route('/en_revision')
+def en_revision():
+    if 'rol' in session and session['rol'] == 'administrador':
+        conn = get_db()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM alumno WHERE EstadoAlum = 'En Revisión'")
+        alumnos_en_revision = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(*) AS total_rev FROM alumno WHERE EstadoAlum = 'En revisión'")
+        res_revision = cursor.fetchone()
+        total_revision = res_revision['total_rev'] if res_revision else 0
+
+        cursor.execute("SELECT COUNT(*) AS total_p FROM alumno WHERE EstadoAlum = 'Pendiente'")
+        conteo = cursor.fetchone()
+        total_pendientes = conteo['total_p'] if conteo else 0
+
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno WHERE EstadoAlum = 'Aprobado'")
+        resultado = cursor.fetchone()
+
+        total_matriculados = resultado['total'] if resultado else 0     
+
+        cursor.execute("SELECT COUNT(*) AS total_den FROM alumno WHERE EstadoAlum = 'Denegado'")   
+        res_denegados = cursor.fetchone()
+        total_denegados = res_denegados['total_den'] if res_denegados else 0
+
+        cursor.close()
+        conn.close()
+        return render_template('en_revision.html', alumnos=alumnos_en_revision, total_revision=total_revision, total_pendientes=total_pendientes, total_matriculados=total_matriculados, total_denegados=total_denegados)
+    return redirect(url_for('login'))
+
+@app.route('/denegados')
+def denegados():
+    if 'rol' in session and session['rol'] == 'administrador':
+        conn = get_db()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM alumno WHERE EstadoAlum = 'Denegado'")
+        alumnos_denegados = cursor.fetchall()
+
+        cursor.execute("SELECT COUNT(*) AS total_den FROM alumno WHERE EstadoAlum = 'Denegado'")
+        res_denegados = cursor.fetchone()
+        total_denegados = res_denegados['total_den'] if res_denegados else 0
+
+        cursor.execute("SELECT COUNT(*) AS total_p FROM alumno WHERE EstadoAlum = 'Pendiente'")
+        conteo = cursor.fetchone()
+        total_pendientes = conteo['total_p'] if conteo else 0
+
+        cursor.execute("SELECT COUNT(*) AS total FROM alumno WHERE EstadoAlum = 'Aprobado'")
+        resultado = cursor.fetchone()
+
+        total_matriculados = resultado['total'] if resultado else 0        
+
+        cursor.execute("SELECT COUNT(*) AS total_rev FROM alumno WHERE EstadoAlum = 'En revisión'")
+        res_revision = cursor.fetchone()
+        total_revision = res_revision['total_rev'] if res_revision else 0
+        cursor.close()
+        conn.close()
+        return render_template('denegados.html', alumnos=alumnos_denegados, total_denegados=total_denegados, total_pendientes=total_pendientes, total_matriculados=total_matriculados, total_revision=total_revision)
+    return redirect(url_for('login'))
 
 @app.route('/generar_pdf')
 def generar_pdf():
