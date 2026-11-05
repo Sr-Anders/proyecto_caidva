@@ -5,7 +5,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Panel de Control Administrativo - CAIDVA Anzoátegui</title>
   
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.min.css') }}">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -77,7 +77,7 @@
       <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-blue-50 text-blue-700 font-semibold text-sm transition-all" href="{{ url_for('dashboard') }}">
         <span class="material-symbols-outlined text-[22px] text-blue-600">space_dashboard</span>
         <span class="truncate">Matriculados</span>
-        <span class="ml-auto bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded-full font-bold">{{ total_matriculados }}</span>
+        <span class="ml-auto bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded-full font-bold">{{ total_matriculados }}</span>
       </a>
 
       <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="{{ url_for('pre_registros') }}">
@@ -85,13 +85,13 @@
         <span class="truncate">Pre-Registros</span>
         <span class="ml-auto bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded-full font-bold">{{ total_pendientes }}</span>
       </a>
-      <a href="{{ url_for('en_revision') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="#">
+      <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="{{ url_for('en_revision') }}">
         <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">medical_information</span>
         <span class="truncate">En Revisión</span>
         <span class="ml-auto bg-emerald-100 text-emerald-800 text-[11px] px-2 py-0.5 rounded-full font-bold">{{ total_revision }}</span>
       </a>
       <a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors group" href="{{ url_for('denegados') }}">
-        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">calendar_month</span>
+        <span class="material-symbols-outlined text-[22px] text-slate-400 group-hover:text-slate-600">block</span>
         <span class="truncate">Denegados</span>
         <span class="ml-auto bg-red-100 text-red-800 text-[11px] px-2 py-0.5 rounded-full font-bold">{{ total_denegados }}</span>
       </a>
@@ -236,7 +236,7 @@
         <!-- Metric 3: En Revisión -->
         <a href="{{ url_for('en_revision') }}" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">En Revisión</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">En revisión</span>
             <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <span class="material-symbols-outlined text-[22px]">verified</span>
             </div>
@@ -252,7 +252,7 @@
             </div>
           </div>
         </a>
-        <!-- Metric 4: Denegados -->
+        <!-- Metric 4: Total Denegados -->
         <a href="{{ url_for('denegados') }}" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-slate-300 transition-colors">
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Denegados</span>
@@ -262,17 +262,14 @@
           </div>
           <div class="mt-4">
             <div class="text-3xl font-extrabold text-slate-900">{{ total_denegados }}</div>
-            <div class="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
-              <div class="bg-red-500 h-1.5 rounded-full" style="width: 98%"></div>
-            </div>
-            <div class="flex items-center gap-1 mt-1.5 text-xs font-semibold text-red-700">
-              <span class="material-symbols-outlined text-[14px]">cancel</span>
-              <span>Denegado</span>
+            <div class="flex items-center gap-1.5 mt-1 text-xs font-semibold text-emerald-600">
+              <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+              <span>+12 este mes</span>
             </div>
           </div>
         </a>
       </div>
-
+        
       <!-- Students Table Section -->
       <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         
@@ -280,9 +277,9 @@
         <div class="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white">
           <div>
             <div class="flex items-center gap-2.5">
-              <h2 class="text-lg font-bold text-slate-900">Lista de Estudiantes en Revisión</h2>
+              <h2 class="text-lg font-bold text-slate-900">Lista de Estudiantes Matriculados</h2>
               <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100" id="record-count">
-                {{ total_revision }} Estudiantes
+                {{ total_matriculados }} Estudiantes
               </span>
             </div>
             <p class="text-xs text-slate-500 mt-1">Expedientes oficiales activos con seguimiento pedagógico y oftalmológico</p>
